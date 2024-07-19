@@ -2,7 +2,7 @@ import Logo from '../resources/ExpenzaLogo2.png';
 
 function Header() {
   return (
-    <div className="p-2  flex justify-between items-center border shadow-md bg-white">
+    <div className="p-2 fixed w-full flex justify-between items-center border shadow-md bg-white">
       <div className="flex justify-start items-center">
         <img src={Logo} alt="ExpenzaLogo" className="h-10 w-10" />
         <h1 className="text-2xl text-indigo-700 font-bold p-1">Expenza</h1>
