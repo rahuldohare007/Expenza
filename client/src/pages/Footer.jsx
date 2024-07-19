@@ -10,7 +10,7 @@ export default function Footer() {
             href="https://cyborgcoding.com"
             className="hover:underline"
           >
-            CyborgCoding
+            Expenza
           </a>
           . All Rights Reserved.
         </span>
