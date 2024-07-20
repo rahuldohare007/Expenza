@@ -1,4 +1,5 @@
-import Logo from '../resources/ExpenzaLogo2.png';
+import { SignedOut, SignInButton } from "@clerk/clerk-react";
+import Logo from "../resources/ExpenzaLogo2.png";
 
 function Header() {
   return (
@@ -8,7 +9,14 @@ function Header() {
         <h1 className="text-2xl text-indigo-700 font-bold p-1">Expenza</h1>
       </div>
       <div>
-        <button type="button" className="text-white bg-indigo-800 hover:bg-indigo-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Get Started</button>
+        <button
+          type="button"
+          className="text-white bg-indigo-800 hover:bg-indigo-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+        >
+          <SignedOut>
+            <SignInButton>Get Started</SignInButton>
+          </SignedOut>
+        </button>
       </div>
     </div>
   );
