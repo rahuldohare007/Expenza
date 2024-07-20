@@ -1,7 +1,10 @@
+import { useRouteError } from "react-router-dom";
 export default function Page404() {
+  const error = useRouteError();
+  console.error(error);
   return (
     <>
-      <div className="grid h-screen place-content-center bg-white px-4">
+      <div className="grid h-screen place-content-center bg-white px-4" id="error-page">
         <div className="text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,9 +30,7 @@ export default function Page404() {
           </h1>
 
           <p className="mt-4 text-gray-500">{"We can't find that page."}</p>
-          <a
-            href="/"
-          >
+          <a href="/">
             <button
               type="button"
               className="text-white bg-indigo-800 hover:bg-indigo-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-3 me-2 mb-2"
