@@ -18,13 +18,12 @@ async function DatabaseConnection() {
     await mongoose.connect(`${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true
     });
 
     console.log('Database connection established successfully');
   } catch (err) {
     console.error('Database connection error: ', err);
+    process.exit(1);
   }
 }
 
