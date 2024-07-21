@@ -1,17 +1,16 @@
-import { Outlet, useLocation } from "react-router-dom";
-import Footer from "./pages/Footer";
-import Header from "./pages/Header";
+import { Outlet, useLocation } from 'react-router-dom';
+import Footer from './pages/Footer';
+import Header from './pages/Header';
 
 function App() {
   const location = useLocation();
-
-  const isSignInPage = location.pathname === "/signin";
+  const isAuthPage = location.pathname === '/signin' || location.pathname === '/signup';
 
   return (
     <>
-      {!isSignInPage && <Header />}
+      {!isAuthPage && <Header />}
       <Outlet />
-      {!isSignInPage && <Footer />}
+      {!isAuthPage && <Footer />}
     </>
   );
 }
