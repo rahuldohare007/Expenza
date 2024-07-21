@@ -20,7 +20,7 @@ function Hero() {
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
-                to="/signup"
+                to="/signin"
                 className="block w-full rounded bg-indigo-700 px-12 py-3 text-sm font-medium text-white shadow hover:bg-indigo-900 focus:outline-none focus:ring active:bg-indigo-500 sm:w-auto"
               >
                 Get Started Now

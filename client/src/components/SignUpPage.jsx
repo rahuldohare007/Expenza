@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
+    username: "",
     password: "",
     passwordConfirmation: "",
   });
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false); // State for toggling confirm password visibility
 
   const handleChange = (e) => {
     setFormData({
@@ -25,17 +27,26 @@ export default function SignUpPage() {
     e.preventDefault();
     setError(null);
 
+    // Validate form fields
+    if (!formData.email || !formData.username || !formData.password || !formData.passwordConfirmation) {
+      setError("All fields are required");
+      return;
+    }
+
     if (formData.password !== formData.passwordConfirmation) {
       setError("Passwords do not match");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/register", formData);
-      localStorage.setItem('authToken', response.data.token);
+      const response = await axios.post(
+        "http://localhost:5000/register",
+        formData
+      );
+      localStorage.setItem("authToken", response.data.token);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.error || 'An error occurred');
+      setError(err.response?.data?.error || "An error occurred");
     }
   };
 
@@ -64,37 +75,15 @@ export default function SignUpPage() {
 
             {error && <p className="text-red-500">{error}</p>}
 
-            <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-6 gap-6">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
               <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email
                 </label>
                 <input
@@ -104,61 +93,106 @@ export default function SignUpPage() {
                   value={formData.email}
                   onChange={handleChange}
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  required
                 />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="username"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Username
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  required
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3 relative">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12" // Added padding for icon
+                    required
+                  />
+                  {formData.password && (
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                    >
+                      {showPassword ? (
+                        <FaEyeSlash className="w-5 h-5" />
+                      ) : (
+                        <FaEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  )}
+                </div>
               </div>
 
-              <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="passwordConfirmation" className="block text-sm font-medium text-gray-700">
+              <div className="col-span-6 sm:col-span-3 relative">
+                <label
+                  htmlFor="passwordConfirmation"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password Confirmation
                 </label>
-                <input
-                  type="password"
-                  id="passwordConfirmation"
-                  name="passwordConfirmation"
-                  value={formData.passwordConfirmation}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6">
-                <p className="text-sm text-gray-500">
-                  By creating an account, you agree to our
-                  <a href="#" className="text-gray-700 underline">
-                    {" "}
-                    terms and conditions{" "}
-                  </a>
-                  and
-                  <a href="#" className="text-gray-700 underline">
-                    privacy policy
-                  </a>
-                  .
-                </p>
+                <div className="relative">
+                  <input
+                    type={showPasswordConfirmation ? "text" : "password"}
+                    id="passwordConfirmation"
+                    name="passwordConfirmation"
+                    value={formData.passwordConfirmation}
+                    onChange={handleChange}
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12" // Added padding for icon
+                    required
+                  />
+                  {formData.passwordConfirmation && (
+                    <button
+                      type="button"
+                      onClick={() => setShowPasswordConfirmation(!showPasswordConfirmation)}
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                    >
+                      {showPasswordConfirmation ? (
+                        <FaEyeSlash className="w-5 h-5" />
+                      ) : (
+                        <FaEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button type="submit" className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
-                  Create an account
+                <button
+                  type="submit"
+                  className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+                >
+                  Signup
                 </button>
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                  Already have an account?
-                  <Link to="/signin" className="text-gray-700 underline">
-                    Log in
+                  {"Already have an account?"}
+                  <Link to="/signin" className="text-gray-700 underline ms-1">
+                    Login
                   </Link>
                   .
                 </p>

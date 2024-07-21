@@ -6,7 +6,13 @@ import "./index.css";
 import SignUpPage from "./components/SignUpPage.jsx";
 import SignInPage from "./components/SignInPage.jsx";
 import Hero from "./pages/Hero.jsx";
+import Dashboard from "./components/Dashboard.jsx"; 
 import ErrorPage from "./pages/Page404.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx"; 
+
+const isAuthenticated = () => {
+  return !!localStorage.getItem("authToken");
+};
 
 const routes = createBrowserRouter([
   {
@@ -17,6 +23,10 @@ const routes = createBrowserRouter([
       { path: "/", element: <Hero /> },
       { path: "signup", element: <SignUpPage /> },
       { path: "signin", element: <SignInPage /> },
+      {
+        path: "dashboard",
+        element: <PrivateRoute element={<Dashboard />} isAuthenticated={isAuthenticated()} />
+      },
     ],
   },
 ]);
