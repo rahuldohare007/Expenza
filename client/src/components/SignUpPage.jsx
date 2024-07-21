@@ -13,8 +13,8 @@ export default function SignUpPage() {
     passwordConfirmation: "",
   });
   const [error, setError] = useState(null);
-  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
-  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false); // State for toggling confirm password visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -27,7 +27,6 @@ export default function SignUpPage() {
     e.preventDefault();
     setError(null);
 
-    // Validate form fields
     if (!formData.email || !formData.username || !formData.password || !formData.passwordConfirmation) {
       setError("All fields are required");
       return;
@@ -39,12 +38,14 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/register",
-        formData
-      );
-      localStorage.setItem("authToken", response.data.token);
-      navigate("/dashboard");
+      const response = await axios.post("http://localhost:8080/api/auth/signup", formData);
+      
+      // Store tokens in localStorage
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
+
+      // Redirect to SignInPage after successful signup
+      navigate("/signin");
     } catch (err) {
       setError(err.response?.data?.error || "An error occurred");
     }
@@ -129,7 +130,7 @@ export default function SignUpPage() {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12" // Added padding for icon
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12"
                     required
                   />
                   {formData.password && (
@@ -162,7 +163,7 @@ export default function SignUpPage() {
                     name="passwordConfirmation"
                     value={formData.passwordConfirmation}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12" // Added padding for icon
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12"
                     required
                   />
                   {formData.passwordConfirmation && (

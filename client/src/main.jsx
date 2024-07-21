@@ -8,10 +8,10 @@ import SignInPage from "./components/SignInPage.jsx";
 import Hero from "./pages/Hero.jsx";
 import Dashboard from "./components/Dashboard.jsx"; 
 import ErrorPage from "./pages/Page404.jsx";
-import PrivateRoute from "./components/PrivateRoute.jsx"; 
+import ProtectedRoute from "./components/ProtectedRoute.jsx"; 
 
 const isAuthenticated = () => {
-  return !!localStorage.getItem("authToken");
+  return !!localStorage.getItem("accessToken");
 };
 
 const routes = createBrowserRouter([
@@ -25,7 +25,12 @@ const routes = createBrowserRouter([
       { path: "signin", element: <SignInPage /> },
       {
         path: "dashboard",
-        element: <PrivateRoute element={<Dashboard />} isAuthenticated={isAuthenticated()} />
+        element: (
+          <ProtectedRoute
+            element={<Dashboard />}
+            isAuthenticated={isAuthenticated()}
+          />
+        ),
       },
     ],
   },

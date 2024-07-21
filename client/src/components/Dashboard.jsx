@@ -4,43 +4,39 @@
 
 // export default Dashboard;
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Dashboard() {
+const Dashboard = () => {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const checkAuthentication = async () => {
       const accessToken = localStorage.getItem('accessToken');
-      
+
       if (!accessToken) {
         navigate('/signin');
         return;
       }
 
       try {
-        const response = await axios.get('http://localhost:5000/api/user/profile', {
-          headers: { Authorization: `Bearer ${accessToken}` }
+        await axios.get('http://localhost:8080/api/protected', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         });
-        setUserData(response.data);
-      } catch (error) {
+      } catch (err) {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
         navigate('/signin');
       }
     };
 
-    fetchData();
+    checkAuthentication();
   }, [navigate]);
 
-  if (!userData) return <p>Loading...</p>;
+  return <div className='text-3xl text-center font-bold mt-5'>Welcome to the Dashboard!</div>;
+};
 
-  return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold">Welcome, {userData.username}!</h1>
-      <p className="mt-4">You have successfully logged in.</p>
-      {/* Add more dashboard content here */}
-    </div>
-  );
-}
+export default Dashboard;

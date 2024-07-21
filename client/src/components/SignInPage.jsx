@@ -3,14 +3,15 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-export default function SignUpPage() {
+export default function SignInPage() {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    credential: "", // Use credential for either email or username
+    credential: "",
     password: "",
   });
   const [error, setError] = useState(null);
-  const [showPassword, setShowPassword] = useState(false); // State for toggling password visibility
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,12 +21,13 @@ export default function SignUpPage() {
     setError(null);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
-        formData
-      );
+      const response = await axios.post("http://localhost:8080/api/auth/signin", formData);
+      
+      // Store tokens in localStorage
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
+
+      // Redirect to Dashboard after successful signin
       navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.error || "An error occurred");
@@ -46,7 +48,7 @@ export default function SignUpPage() {
         <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
           <div className="max-w-xl lg:max-w-3xl">
             <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-              Welcome to Expenza 🚀
+              Welcome Back 👋
             </h1>
 
             <p className="mt-4 leading-relaxed text-gray-500 pb-2">
@@ -74,8 +76,8 @@ export default function SignUpPage() {
                   name="credential"
                   value={formData.credential}
                   onChange={handleChange}
-                  required
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  required
                 />
               </div>
 
@@ -93,10 +95,9 @@ export default function SignUpPage() {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12"
                     required
-                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm pr-12" // Added padding for icon
                   />
-                  {/* Show eye icon only if password field has value */}
                   {formData.password && (
                     <button
                       type="button"
@@ -116,10 +117,11 @@ export default function SignUpPage() {
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                 <button
                   type="submit"
-                  className="inline-block shrink-0 ms-1 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+                  className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
                 >
                   Login
                 </button>
+
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   {"Don't have an account?"}
                   <Link to="/signup" className="text-gray-700 underline ms-1">
