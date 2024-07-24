@@ -47,10 +47,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
-import SignUpPage from "./components/SignUpPage.jsx";
-import SignInPage from "./components/SignInPage.jsx";
-import HomePage from "./pages/HomePage.jsx"; // Assuming HomePage is the new name
-import Dashboard from "./components/Dashboard.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
+import SignInPage from "./pages/SignInPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import Dashboard from "./routes/Dashboard/Dashboard.jsx";
 import ErrorPage from "./pages/Page404.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 

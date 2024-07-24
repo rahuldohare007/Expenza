@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import DashboardLayout from './DashboardLayout'; // Adjust path if necessary
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -37,15 +38,17 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div className='text-3xl text-center text-purple-950 font-bold mt-5'>
-      {error ? (
-        <div>{error}</div>
-      ) : userData ? (
-        <div>Welcome to the Dashboard, {userData.username}!</div>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div>
+    <DashboardLayout>
+      <div>
+        {error ? (
+          <div>{error}</div>
+        ) : userData ? (
+          <div>Welcome to the Dashboard, {userData.username}!</div>
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+    </DashboardLayout>
   );
 };
 
