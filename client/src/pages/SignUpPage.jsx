@@ -7,6 +7,8 @@ export default function SignUpPage() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     username: "",
     password: "",
@@ -14,7 +16,8 @@ export default function SignUpPage() {
   });
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -27,7 +30,14 @@ export default function SignUpPage() {
     e.preventDefault();
     setError(null);
 
-    if (!formData.email || !formData.username || !formData.password || !formData.passwordConfirmation) {
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.username ||
+      !formData.password ||
+      !formData.passwordConfirmation
+    ) {
       setError("All fields are required");
       return;
     }
@@ -38,8 +48,11 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/signup", formData);
-      
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/signup",
+        formData
+      );
+
       // Store tokens in localStorage
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
@@ -82,16 +95,34 @@ export default function SignUpPage() {
             >
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="email"
+                  htmlFor="firstName"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Email
+                  First Name
                 </label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  required
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
                   onChange={handleChange}
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   required
@@ -110,6 +141,24 @@ export default function SignUpPage() {
                   id="username"
                   name="username"
                   value={formData.username}
+                  onChange={handleChange}
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  required
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   required
@@ -169,7 +218,9 @@ export default function SignUpPage() {
                   {formData.passwordConfirmation && (
                     <button
                       type="button"
-                      onClick={() => setShowPasswordConfirmation(!showPasswordConfirmation)}
+                      onClick={() =>
+                        setShowPasswordConfirmation(!showPasswordConfirmation)
+                      }
                       className="absolute inset-y-0 right-3 flex items-center text-gray-500"
                     >
                       {showPasswordConfirmation ? (
