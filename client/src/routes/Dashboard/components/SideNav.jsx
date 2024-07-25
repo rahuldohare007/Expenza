@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import Logo from "../../../resources/ExpenzaLogo2.png";
 import UserProfile from "../../../resources/UserProfile.png";
 import { LayoutGrid, PiggyBank, ReceiptText, ShieldCheck } from "lucide-react";
@@ -11,12 +11,17 @@ export default function SideNav({ userData }) {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+  };
+
   const menuList = [
     {
       id: 1,
       name: "Dashboard",
       icon: LayoutGrid,
-      path: "/dashboard", // Add paths here if needed
+      path: "/dashboard",
     },
     {
       id: 2,
@@ -51,7 +56,7 @@ export default function SideNav({ userData }) {
             className="flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-indigo-700 hover:bg-blue-100"
           >
             <menu.icon />
-            {menu.name}
+            <Link to={menu.path}>{menu.name}</Link>
           </h2>
         ))}
       </div>
@@ -85,49 +90,50 @@ export default function SideNav({ userData }) {
           {isDropdownOpen && (
             <div
               id="userDropdown"
-              className="absolute z-10 top-[-15rem] left-8 mt-2 bg-gray-100 divide-y divide-gray-100 rounded-lg shadow-md border w-44 hover:bg-white"
+              className="absolute z-10 top-[-15rem] left-8 mt-2 bg-white divide-y rounded-lg shadow-md border w-50 cursor-pointer"
             >
               <div className="px-4 py-3 text-sm text-gray-900">
                 <div>{userData?.username}</div>
                 <div className="font-medium truncate">{userData?.email}</div>
               </div>
               <ul
-                className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                className="py-2 text-sm text-gray-700"
                 aria-labelledby="avatarButton"
               >
                 <li>
                   <Link
-                    to="/dashboard" 
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    to="/dashboard"
+                    className="block px-4 py-2 hover:bg-gray-200"
                     onClick={() => setIsDropdownOpen(false)}
                   >
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  <Link
+                    to="#"
+                    className="block px-4 py-2 hover:bg-gray-200"
                   >
                     Settings
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  <Link
+                    to="#"
+                    className="block px-4 py-2 hover:bg-gray-200"
                   >
                     Earnings
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <div className="py-1">
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                <Link
+                  to="/"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                  onClick={handleSignOut}
                 >
                   Sign out
-                </a>
+                </Link>
               </div>
             </div>
           )}
