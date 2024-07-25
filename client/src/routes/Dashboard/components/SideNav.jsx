@@ -60,7 +60,7 @@ export default function SideNav({ userData }) {
           </h2>
         ))}
       </div>
-      <div className="fixed bottom-10 p-5 flex items-center">
+      <div className="fixed bottom-5 p-5 flex items-center">
         <div className="relative flex flex-col items-start">
           <div className="flex items-center">
             <img
@@ -90,7 +90,7 @@ export default function SideNav({ userData }) {
           {isDropdownOpen && (
             <div
               id="userDropdown"
-              className="absolute z-10 top-[-15rem] left-8 mt-2 bg-white divide-y rounded-lg shadow-md border w-50 cursor-pointer"
+              className="absolute z-10 top-[-15.2rem] left-8 mt-2 bg-white divide-y rounded-lg shadow-2xl border w-50"
             >
               <div className="px-4 py-3 text-sm text-gray-900">
                 <div>{userData?.username}</div>
