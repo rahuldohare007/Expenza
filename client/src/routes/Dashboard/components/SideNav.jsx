@@ -1,21 +1,10 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../../../resources/ExpenzaLogo2.png";
-import UserProfile from "../../../resources/UserProfile.png";
 import { LayoutGrid, PiggyBank, ReceiptText, ShieldCheck } from "lucide-react";
+import UserButton from "./UserButton";
+import { useEffect } from "react";
 
 export default function SideNav({ userData }) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleSignOut = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-  };
-
   const menuList = [
     {
       id: 1,
@@ -27,118 +16,63 @@ export default function SideNav({ userData }) {
       id: 2,
       name: "Budgets",
       icon: PiggyBank,
-      // path:,
+      path: "/dashboard/budgets",
     },
     {
       id: 3,
       name: "Expenses",
       icon: ReceiptText,
-      // path:,
+      path: "/dashboard/expenses",
     },
     {
       id: 4,
       name: "Upgrade",
       icon: ShieldCheck,
-      // path:,
+      path: "/dashboard/upgrades",
     },
   ];
 
+  const location = useLocation();
+  const path = location.pathname;
+
+  useEffect(() => {
+    // console.log(path);
+  }, [path]);
+
   return (
-    <div className="h-screen p-5 border shadow-md">
+    <div className="h-screen p-5 border-2 shadow-md">
       <div className="flex justify-center items-center">
         <img src={Logo} alt="ExpenzaLogo" className="h-10 w-10" />
         <h1 className="text-2xl text-indigo-700 font-bold p-1">Expenza</h1>
       </div>
       <div className="mt-5">
         {menuList.map((menu) => (
-          <h2
-            key={menu.id}
-            className="flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-indigo-700 hover:bg-blue-100"
-          >
-            <menu.icon />
-            <Link to={menu.path}>{menu.name}</Link>
-          </h2>
+          <Link to={menu.path} key={menu.id}>
+            <h2
+              className={`${
+                path === menu.path && "text-indigo-700 bg-blue-100"
+              } flex gap-2 mb-1 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-indigo-700 hover:bg-blue-100`}
+            >
+              <menu.icon />
+              {menu.name}
+            </h2>
+          </Link>
         ))}
       </div>
       <div className="fixed bottom-5 p-5 flex items-center">
-        <div className="relative flex flex-col items-start">
-          <div className="flex items-center">
-            <img
-              id="avatarButton"
-              type="button"
-              className="w-10 h-10 rounded-full cursor-pointer"
-              src={UserProfile}
-              onClick={toggleDropdown}
-              alt="User dropdown"
-            />
-            <div className="ml-3 flex flex-col items-start">
-              <h5 className="text-gray-700">
-                Hi,{" "}
-                <span className="text-indigo-700 font-bold">
-                  {userData?.username}!
-                </span>
-              </h5>
-              <span
-                className="text-gray-900 font-medium cursor-pointer"
-                onClick={toggleDropdown}
-              >
-                Profile
-              </span>
-            </div>
-          </div>
-
-          {isDropdownOpen && (
-            <div
-              id="userDropdown"
-              className="absolute z-10 top-[-15.2rem] left-8 mt-2 bg-white divide-y rounded-lg shadow-2xl border w-50"
-            >
-              <div className="px-4 py-3 text-sm text-gray-900">
-                <div>{userData?.username}</div>
-                <div className="font-medium truncate">{userData?.email}</div>
-              </div>
-              <ul
-                className="py-2 text-sm text-gray-700"
-                aria-labelledby="avatarButton"
-              >
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 hover:bg-gray-200"
-                    onClick={() => setIsDropdownOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 hover:bg-gray-200"
-                  >
-                    Settings
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 hover:bg-gray-200"
-                  >
-                    Earnings
-                  </Link>
-                </li>
-              </ul>
-              <div className="py-1">
-                <Link
-                  to="/"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
-                  onClick={handleSignOut}
-                >
-                  Sign out
-                </Link>
-              </div>
-            </div>
-          )}
+        <UserButton userData={userData} position="above" />
+        <div className="ml-3 flex flex-col items-start">
+          <h5 className="text-gray-700">
+            Hi,{" "}
+            <span className="text-indigo-700 font-bold">
+              {userData?.username}!
+            </span>
+          </h5>
+          <h5>Profile</h5>
         </div>
       </div>
     </div>
   );
 }
+
+

@@ -1,12 +1,13 @@
-// import UserButton from "./UserButton";
+import UserButton from "./UserButton";
 
-export default function DashboardHeader() {
+export default function DashboardHeader({ userData }) {
   return (
-    <div className="p-5 border-b shadow-sm">
-      <div></div>
+    <div className="p-3 px-10 border-b-2 shadow-sm flex justify-between items-center">
+      <div>Search 🔎</div>
       <div>
-        {/* <UserButton /> */}
+        <UserButton userData={userData} position="below" />
       </div>
     </div>
   );
 }
+
