@@ -1,7 +1,7 @@
 {
   "name": "expenza",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "emoji-picker-react": "^4.11.1",
     "flowbite": "^2.4.1",
     "flowbite-react": "^0.10.1",
     "lucide-react": "^0.414.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
@@ -31,5 +31,17 @@
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
     "vite": "^5.3.4"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahuldohare007/Expenza.git"
+  },
+  "author": "Rahul Dohare",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rahuldohare007/Expenza/issues"
+  },
+  "homepage": "https://github.com/rahuldohare007/Expenza#readme"
 }

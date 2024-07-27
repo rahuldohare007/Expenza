@@ -7,9 +7,9 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import SignInPage from "./pages/SignInPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Dashboard from "./routes/Dashboard/Dashboard.jsx";
-import Budgets from "./routes/Dashboard/Budgets.jsx";
-import Expenses from "./routes/Dashboard/Expenses.jsx";
-import Upgrades from "./routes/Dashboard/Upgrades.jsx";
+import Budgets from "./routes/Budgets/Budgets.jsx";
+import Expenses from "./routes/Expenses/Expenses.jsx";
+import Upgrades from "./routes/Upgrades/Upgrades.jsx";
 import ErrorPage from "./pages/Page404.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
