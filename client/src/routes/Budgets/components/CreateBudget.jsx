@@ -54,7 +54,7 @@ export default function CreateBudget() {
             <h2 className="text-xl mb-4">Create New Budget</h2>
             <div className="mb-4">
               <button
-                className="outline p-3 px-5 rounded-md"
+                className="outline p-1 px-3 rounded-md text-2xl"
                 onClick={() => setOpenEmojiPicker(!openEmojiPicker)}
               >
                 {emojiIcon}
@@ -75,7 +75,7 @@ export default function CreateBudget() {
             <form>
               <div className="mb-4">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-black text-sm font-bold mb-2"
                   htmlFor="budgetName"
                 >
                   Budget Name
@@ -83,28 +83,30 @@ export default function CreateBudget() {
                 <input
                   id="budgetName"
                   type="text"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="e.g. Home Decor"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-purple-700 focus:shadow-outline"
                 />
               </div>
               <div className="mb-4">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="amount"
+                  className="block text-black text-sm font-bold mb-2"
+                  htmlFor="budgetAmount"
                 >
-                  Amount
+                  Budget Amount
                 </label>
                 <input
-                  id="amount"
+                  id="budgetAmount"
                   type="number"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="e.g. ₹5000"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-purple-700 focus:shadow-outline"
                 />
               </div>
-              <div className="mt-4 flex justify-end">
+              <div className="mt-5">
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
+                  className="px-4 py-2 w-full bg-purple-700 text-white rounded-md hover:bg-purple-800"
                 >
-                  Save
+                  Create Budget
                 </button>
               </div>
             </form>
