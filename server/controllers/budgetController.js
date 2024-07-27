@@ -1,9 +1,6 @@
-// controllers/budgetController.js
 const Budget = require("../models/Budget");
 
-// Create a new budget
 exports.createBudget = async (req, res) => {
-  console.log('Request Body:', req.body);
   try {
     const { icon, budgetName, budgetAmount, createdBy } = req.body;
 
@@ -28,10 +25,8 @@ exports.createBudget = async (req, res) => {
   }
 };
 
-// Get budgets for a specific user
 exports.getUserBudgets = async (req, res) => {
   const { email } = req.query;
-  console.log("Requested email:", email);  // Debugging
 
   if (!email) {
     return res.status(400).json({ error: "Email is required" });
