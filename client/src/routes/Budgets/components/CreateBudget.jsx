@@ -1,7 +1,10 @@
 import { useState } from "react";
+import EmojiPicker from "emoji-picker-react";
 
 export default function CreateBudget() {
   const [open, setOpen] = useState(false);
+  const [emojiIcon, setEmojiIcon] = useState("😀");
+  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -9,6 +12,12 @@ export default function CreateBudget() {
 
   const handleClose = () => {
     setOpen(false);
+    setOpenEmojiPicker(false);
+  };
+
+  const onEmojiClick = (event) => {
+    setEmojiIcon(event.emoji);
+    setOpenEmojiPicker(false);
   };
 
   return (
@@ -48,7 +57,20 @@ export default function CreateBudget() {
               </svg>
             </button>
             <h2 className="text-xl mb-4">Create New Budget</h2>
-            {/* <form>
+            <div className="mb-4">
+              <button
+                className="outline p-3 px-5 rounded-md"
+                onClick={() => setOpenEmojiPicker(!openEmojiPicker)}
+              >
+                {emojiIcon}
+              </button>
+              {openEmojiPicker && (
+                <div className="absolute z-50 mt-2">
+                  <EmojiPicker onEmojiClick={onEmojiClick} height={400} />
+                </div>
+              )}
+            </div>
+            <form>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -83,7 +105,7 @@ export default function CreateBudget() {
                   Save
                 </button>
               </div>
-            </form> */}
+            </form>
           </div>
         </div>
       )}
