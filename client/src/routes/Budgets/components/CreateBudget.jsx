@@ -15,11 +15,6 @@ export default function CreateBudget() {
     setOpenEmojiPicker(false);
   };
 
-  const onEmojiClick = (event) => {
-    setEmojiIcon(event.emoji);
-    setOpenEmojiPicker(false);
-  };
-
   return (
     <div>
       <div
@@ -66,7 +61,14 @@ export default function CreateBudget() {
               </button>
               {openEmojiPicker && (
                 <div className="absolute z-50 mt-2">
-                  <EmojiPicker onEmojiClick={onEmojiClick} height={400} />
+                  <EmojiPicker
+                    open={openEmojiPicker}
+                    onEmojiClick={(e) => {
+                      setEmojiIcon(e.emoji);
+                      setOpenEmojiPicker(false);
+                    }}
+                    height={400}
+                  />
                 </div>
               )}
             </div>
