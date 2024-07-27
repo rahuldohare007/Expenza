@@ -5,6 +5,8 @@ export default function CreateBudget() {
   const [open, setOpen] = useState(false);
   const [emojiIcon, setEmojiIcon] = useState("😀");
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -13,6 +15,13 @@ export default function CreateBudget() {
   const handleClose = () => {
     setOpen(false);
     setOpenEmojiPicker(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setName("");
+    setAmount("");
+    handleClose();
   };
 
   return (
@@ -52,7 +61,7 @@ export default function CreateBudget() {
               </svg>
             </button>
             <h2 className="text-xl mb-4">Create New Budget</h2>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <button
                 className="outline p-1 px-3 rounded-md text-2xl"
                 onClick={() => setOpenEmojiPicker(!openEmojiPicker)}
@@ -62,17 +71,17 @@ export default function CreateBudget() {
               {openEmojiPicker && (
                 <div className="absolute z-50 mt-2">
                   <EmojiPicker
-                    open={openEmojiPicker}
                     onEmojiClick={(e) => {
                       setEmojiIcon(e.emoji);
                       setOpenEmojiPicker(false);
                     }}
+                    lazyLoad={true}
                     height={400}
                   />
                 </div>
               )}
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   className="block text-black text-sm font-bold mb-2"
@@ -84,6 +93,8 @@ export default function CreateBudget() {
                   id="budgetName"
                   type="text"
                   placeholder="e.g. Home Decor"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-purple-700 focus:shadow-outline"
                 />
               </div>
@@ -98,12 +109,15 @@ export default function CreateBudget() {
                   id="budgetAmount"
                   type="number"
                   placeholder="e.g. ₹5000"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-purple-700 focus:shadow-outline"
                 />
               </div>
               <div className="mt-5">
                 <button
                   type="submit"
+                  disabled={!name || !amount}
                   className="px-4 py-2 w-full bg-purple-700 text-white rounded-md hover:bg-purple-800"
                 >
                   Create Budget
