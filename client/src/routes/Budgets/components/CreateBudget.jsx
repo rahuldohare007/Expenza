@@ -163,7 +163,7 @@ export default function CreateBudget() {
                       setEmojiIcon(e.emoji);
                       setOpenEmojiPicker(false);
                     }}
-                    lazyLoad={true}
+                    lazyLoadEmojis={true}
                     height={400}
                   />
                 </div>

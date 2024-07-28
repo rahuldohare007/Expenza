@@ -35,9 +35,7 @@ export default function SideNav({ userData }) {
   const location = useLocation();
   const path = location.pathname;
 
-  useEffect(() => {
-    // console.log(path);
-  }, [path]);
+  useEffect(() => {}, [path]);
 
   return (
     <div className="h-screen p-5 border-2 shadow-md">
@@ -74,5 +72,3 @@ export default function SideNav({ userData }) {
     </div>
   );
 }
-
-
