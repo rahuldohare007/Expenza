@@ -9,7 +9,8 @@ export default function CreateBudget() {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); // State for success message
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     const fetchUserEmail = async () => {
@@ -25,7 +26,6 @@ export default function CreateBudget() {
               },
             }
           );
-          console.log("User email fetched:", response.data.email);
           setUserEmail(response.data.email);
         } catch (error) {
           console.error("Error fetching user email:", error);
@@ -43,7 +43,7 @@ export default function CreateBudget() {
   const handleClose = () => {
     setOpen(false);
     setOpenEmojiPicker(false);
-    setSuccessMessage(""); // Clear success message on close
+    // setSuccessMessage("");
   };
 
   const handleSubmit = async (e) => {
@@ -76,9 +76,11 @@ export default function CreateBudget() {
         setName("");
         setAmount("");
         setSuccessMessage("Budget created successfully!");
+        setShowSuccessMessage(true);
         handleClose();
       } else {
         setSuccessMessage("Failed to create budget.");
+        setShowSuccessMessage(true);
       }
     } catch (error) {
       console.error("Error creating budget:", error);
@@ -194,7 +196,7 @@ export default function CreateBudget() {
         </div>
       )}
 
-      {successMessage && (
+      {showSuccessMessage && (
         <div
           id="toast-simple"
           className="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 dark:bg-gray-800 fixed bottom-5 right-5"
@@ -215,7 +217,7 @@ export default function CreateBudget() {
               d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9"
             />
           </svg>
-          <div className="ps-4 text-sm font-normal">{successMessage}</div>
+          <div className="ps-4 text-md font-sm">{successMessage}</div>
         </div>
       )}
     </div>

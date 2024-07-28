@@ -28,6 +28,21 @@ const Dashboard = () => {
         );
 
         setUserData(response.data);
+
+        // Check if the user has any budgets
+        const budgetsResponse = await axios.get(
+          "http://localhost:8080/api/dashboard/budgets/user",
+          {
+            params: { email: response.data.email },
+            headers: {
+              Authorization: accessToken,
+            },
+          }
+        );
+
+        if (budgetsResponse.data.length === 0) {
+          navigate("/dashboard/budgets");
+        }
       } catch (err) {
         console.error("Authentication Error:", err);
         localStorage.removeItem("accessToken");
