@@ -76,7 +76,7 @@ export default function CreateBudget() {
         setAmount("");
         toast.success("Budget created successfully!", {
           position: "bottom-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -88,7 +88,7 @@ export default function CreateBudget() {
       } else {
         toast.error("Failed to create budget.", {
           position: "bottom-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -101,7 +101,7 @@ export default function CreateBudget() {
       console.error("Error creating budget:", error);
       toast.error("Failed to create budget.", {
         position: "bottom-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -222,7 +222,7 @@ export default function CreateBudget() {
 
       <ToastContainer
         position="bottom-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

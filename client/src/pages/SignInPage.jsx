@@ -30,32 +30,7 @@ export default function SignInPage() {
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
-      // Fetch user details
-      const userResponse = await axios.get(
-        "http://localhost:8080/api/auth/dashboard",
-        {
-          headers: {
-            Authorization: response.data.accessToken,
-          },
-        }
-      );
-
-      // Display welcome message
-      toast.success(`Welcome to Expenza, ${userResponse.data.username}!`, {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      // Redirect to Dashboard after successful signin
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 3000);
+      navigate("/dashboard");
     } catch (err) {
       toast.error(err.response?.data?.error || "An error occurred", {
         position: "bottom-right",
