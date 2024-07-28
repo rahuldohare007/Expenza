@@ -47,6 +47,11 @@ const register = async (req, res) => {
       return res.status(400).json({ error: "Email already exists" });
     }
 
+    const existingUserByUsername = await User.findOne({ username });
+    if (existingUserByUsername) {
+      return res.status(400).json({ error: "Username already exists" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
       firstName,
@@ -93,7 +98,7 @@ const signIn = async (req, res) => {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
 
-    res.json({ accessToken, refreshToken });
+    res.json({ accessToken, refreshToken});
   } catch (error) {
     console.error("Login Error:", error);
     res.status(500).json({ error: "Error logging in" });
@@ -121,7 +126,7 @@ const refreshToken = (req, res) => {
 // Dashboard Route
 const dashboard = async (req, res) => {
   const authHeader = req.headers.authorization;
-  const token = authHeader; // Directly use the token
+  const token = authHeader;
 
   if (!token) {
     return res.status(401).json({ error: "No token provided" });
@@ -144,5 +149,5 @@ module.exports = {
   register,
   signIn,
   refreshToken,
-  dashboard, // Export the new function
+  dashboard,
 };

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -14,10 +16,8 @@ export default function SignUpPage() {
     password: "",
     passwordConfirmation: "",
   });
-  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] =
-    useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -28,7 +28,6 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
 
     if (
       !formData.firstName ||
@@ -38,12 +37,30 @@ export default function SignUpPage() {
       !formData.password ||
       !formData.passwordConfirmation
     ) {
-      setError("All fields are required");
+      toast.error("All fields are required", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
 
     if (formData.password !== formData.passwordConfirmation) {
-      setError("Passwords do not match");
+      toast.error("Passwords do not match", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
 
@@ -53,14 +70,59 @@ export default function SignUpPage() {
         formData
       );
 
-      // Store tokens in localStorage
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
-      // Redirect to SignInPage after successful signup
-      navigate("/signin");
+      toast.success("Account created successfully!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      setTimeout(() => {
+        navigate("/signin");
+      }, 3000); 
     } catch (err) {
-      setError(err.response?.data?.error || "An error occurred");
+      const errorMessage = err.response?.data?.error || "An error occurred";
+      if (errorMessage.includes("username")) {
+        toast.error("Username already exists", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else if (errorMessage.includes("email")) {
+        toast.error("Email already exists", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        toast.error(errorMessage, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     }
   };
 
@@ -86,8 +148,6 @@ export default function SignUpPage() {
               intuitive website allows for easy categorization and logging,
               helping you stay on top of your finances with minimal effort.
             </p>
-
-            {error && <p className="text-red-500">{error}</p>}
 
             <form
               onSubmit={handleSubmit}
@@ -253,6 +313,7 @@ export default function SignUpPage() {
           </div>
         </main>
       </div>
+      <ToastContainer />
     </section>
   );
 }

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignInPage() {
   const navigate = useNavigate();
@@ -10,7 +12,6 @@ export default function SignInPage() {
     credential: "",
     password: "",
   });
-  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) =>
@@ -18,19 +19,54 @@ export default function SignInPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/signin", formData);
-      
+      const response = await axios.post(
+        "http://localhost:8080/api/auth/signin",
+        formData
+      );
+
       // Store tokens in localStorage
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
+      // Fetch user details
+      const userResponse = await axios.get(
+        "http://localhost:8080/api/auth/dashboard",
+        {
+          headers: {
+            Authorization: response.data.accessToken,
+          },
+        }
+      );
+
+      // Display welcome message
+      toast.success(`Welcome to Expenza, ${userResponse.data.username}!`, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
       // Redirect to Dashboard after successful signin
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 3000);
     } catch (err) {
-      setError(err.response?.data?.error || "An error occurred");
+      toast.error(err.response?.data?.error || "An error occurred", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -56,8 +92,6 @@ export default function SignInPage() {
               intuitive website allows for easy categorization and logging,
               helping you stay on top of your finances with minimal effort.
             </p>
-
-            {error && <p className="text-red-500">{error}</p>}
 
             <form
               onSubmit={handleSubmit}
@@ -134,6 +168,7 @@ export default function SignInPage() {
           </div>
         </main>
       </div>
+      <ToastContainer />
     </section>
   );
 }
