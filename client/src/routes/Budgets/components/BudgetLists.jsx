@@ -54,16 +54,19 @@ export default function BudgetLists() {
     fetchBudgets();
   }, [userEmail]);
 
+  const handleBudgetCreated = (newBudget) => {
+    setBudgetList((prevList) => [...prevList, newBudget]);
+  };
+
   return (
     <div className="mt-7">
       {error && <div className="text-red-500">{error}</div>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <CreateBudget />
+        <CreateBudget onBudgetCreated={handleBudgetCreated} />
         {budgetList.map((budget) => (
-          <BudgetItems budget={budget}/>
+          <BudgetItems key={budget.id} budget={budget} />
         ))}
       </div>
     </div>
   );
 }
-

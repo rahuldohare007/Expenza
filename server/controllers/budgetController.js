@@ -52,7 +52,7 @@ exports.getUserBudgets = async (req, res) => {
       },
       {
         $project: {
-          expenses: 0 // Exclude expenses array if not needed in the response
+          expenses: 0
         }
       }
     ]);

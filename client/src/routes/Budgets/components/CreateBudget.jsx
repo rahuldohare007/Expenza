@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function CreateBudget() {
+export default function CreateBudget({ onBudgetCreated }) {
   const [open, setOpen] = useState(false);
   const [emojiIcon, setEmojiIcon] = useState("😀");
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
@@ -85,6 +85,7 @@ export default function CreateBudget() {
           theme: "light",
         });
         handleClose();
+        onBudgetCreated(response.data);
       } else {
         toast.error("Failed to create budget.", {
           position: "bottom-right",
