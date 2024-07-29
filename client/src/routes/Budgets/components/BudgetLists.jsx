@@ -12,7 +12,7 @@ export default function BudgetLists() {
     const fetchUserEmail = async () => {
       try {
         const accessToken = localStorage.getItem("accessToken");
-        
+
         if (!accessToken) {
           throw new Error("Access token not found");
         }
@@ -21,8 +21,8 @@ export default function BudgetLists() {
           "http://localhost:8080/api/auth/dashboard",
           {
             headers: {
-              Authorization: accessToken,
-            }
+              Authorization: accessToken
+            },
           }
         );
 
@@ -41,10 +41,13 @@ export default function BudgetLists() {
       if (!userEmail) return;
 
       try {
-        const response = await axios.get('http://localhost:8080/api/dashboard/budgets/user', {
-          params: { email: userEmail },
-        });
-        setBudgetList(response.data);
+        const response = await axios.get(
+          "http://localhost:8080/api/dashboard/budgets/user",
+          {
+            params: { email: userEmail },
+          }
+        );
+        setBudgetList(response.data.sort((a, b) => b.budgetId - a.budgetId));
       } catch (error) {
         console.error("Error fetching budgets:", error);
         setError("Error fetching budgets.");
@@ -55,7 +58,9 @@ export default function BudgetLists() {
   }, [userEmail]);
 
   const handleBudgetCreated = (newBudget) => {
-    setBudgetList((prevList) => [...prevList, newBudget]);
+    setBudgetList((prevList) =>
+      [newBudget, ...prevList].sort((a, b) => b.budgetId - a.budgetId)
+    );
   };
 
   return (
@@ -63,9 +68,16 @@ export default function BudgetLists() {
       {error && <div className="text-red-500">{error}</div>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <CreateBudget onBudgetCreated={handleBudgetCreated} />
-        {budgetList.map((budget) => (
-          <BudgetItems key={budget.id} budget={budget} />
-        ))}
+        {budgetList?.length > 0
+          ? budgetList.map((budget, index) => (
+              <BudgetItems key={index} budget={budget} />
+            ))
+          : [1, 2, 3, 4, 5, 6].map((item, index) => (
+              <div
+                key={index}
+                className="w-full bg-slate-200 rounded-lg h-[150px] animate-pulse"
+              ></div>
+            ))}
       </div>
     </div>
   );
