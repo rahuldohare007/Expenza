@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import BudgetItems from "./BudgetItems";
-import CreateBudget from "./CreateBudget";
+import { useNavigate } from "react-router-dom";
+import BudgetItem from "../components/BudgetItem";
+import CreateBudget from "../components/CreateBudget";
 import axios from "axios";
 
 export default function BudgetLists() {
   const [budgetList, setBudgetList] = useState([]);
   const [userEmail, setUserEmail] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserEmail = async () => {
@@ -66,6 +68,10 @@ export default function BudgetLists() {
     );
   };
 
+  const handleBudgetClick = (budget) => {
+    navigate(`/dashboard/expenses/${budget._id}`, { state: { budget } });
+  };
+
   return (
     <div className="mt-7">
       {error && <div className="text-red-500">{error}</div>}
@@ -73,7 +79,7 @@ export default function BudgetLists() {
         <CreateBudget onBudgetCreated={handleBudgetCreated} />
         {budgetList.length > 0
           ? budgetList.map((budget) => (
-              <BudgetItems key={budget._id} budget={budget} />
+              <BudgetItem key={budget._id} budget={budget} onClick={() => handleBudgetClick(budget)} />
             ))
           : [1, 2, 3, 4, 5, 6].map((item) => (
               <div
