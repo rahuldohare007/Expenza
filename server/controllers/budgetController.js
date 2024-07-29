@@ -21,7 +21,6 @@ exports.createBudget = async (req, res) => {
     console.error("Error creating budget:", error);
     res.status(500).json({ error: "Error creating budget" });
   }
-
 };
 
 exports.getUserBudgets = async (req, res) => {
@@ -38,7 +37,7 @@ exports.getUserBudgets = async (req, res) => {
       },
       {
         $lookup: {
-          from: 'expenses',
+          from: 'expenses',        
           localField: '_id',
           foreignField: 'budgetId',
           as: 'expenses'
@@ -52,7 +51,7 @@ exports.getUserBudgets = async (req, res) => {
       },
       {
         $project: {
-          expenses: 0
+          expenses: 0           
         }
       }
     ]);

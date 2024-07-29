@@ -25,14 +25,14 @@ const budgetSchema = new mongoose.Schema(
 
 budgetSchema.virtual('totalSpend', {
   ref: 'Expense',
-  localField: '_id',
+  localField: '_id',  
   foreignField: 'budgetId',
   justOne: false,
 });
 
 budgetSchema.virtual('totalItem', {
   ref: 'Expense',
-  localField: '_id',
+  localField: '_id',  
   foreignField: 'budgetId',
   count: true,
 });
@@ -41,4 +41,3 @@ budgetSchema.set('toObject', { virtuals: true });
 budgetSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model("Budget", budgetSchema);
-

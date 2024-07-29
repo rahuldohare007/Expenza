@@ -21,7 +21,7 @@ export default function BudgetLists() {
           "http://localhost:8080/api/auth/dashboard",
           {
             headers: {
-              Authorization: accessToken
+              Authorization: accessToken 
             },
           }
         );
@@ -45,9 +45,12 @@ export default function BudgetLists() {
           "http://localhost:8080/api/dashboard/budgets/user",
           {
             params: { email: userEmail },
+            headers: {
+              Authorization: localStorage.getItem("accessToken")
+            },
           }
         );
-        setBudgetList(response.data.sort((a, b) => b.budgetId - a.budgetId));
+        setBudgetList(response.data.sort((a, b) => new Date(b._id) - new Date(a._id)));
       } catch (error) {
         console.error("Error fetching budgets:", error);
         setError("Error fetching budgets.");
@@ -59,7 +62,7 @@ export default function BudgetLists() {
 
   const handleBudgetCreated = (newBudget) => {
     setBudgetList((prevList) =>
-      [newBudget, ...prevList].sort((a, b) => b.budgetId - a.budgetId)
+      [newBudget, ...prevList].sort((a, b) => new Date(b._id) - new Date(a._id))
     );
   };
 
@@ -68,13 +71,13 @@ export default function BudgetLists() {
       {error && <div className="text-red-500">{error}</div>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <CreateBudget onBudgetCreated={handleBudgetCreated} />
-        {budgetList?.length > 0
-          ? budgetList.map((budget, index) => (
-              <BudgetItems key={index} budget={budget} />
+        {budgetList.length > 0
+          ? budgetList.map((budget) => (
+              <BudgetItems key={budget._id} budget={budget} />
             ))
-          : [1, 2, 3, 4, 5, 6].map((item, index) => (
+          : [1, 2, 3, 4, 5, 6].map((item) => (
               <div
-                key={index}
+                key={item}
                 className="w-full bg-slate-200 rounded-lg h-[150px] animate-pulse"
               ></div>
             ))}
