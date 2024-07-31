@@ -15,10 +15,10 @@ export default function AddExpenses({ _id, onExpenseAdded }) {
       if (accessToken) {
         try {
           const response = await axios.get(
-            "http://localhost:8080/api/auth/user",
+            "http://localhost:8080/api/auth/dashboard",
             {
               headers: {
-                Authorization: accessToken,
+                Authorization: `${accessToken}`,
               },
             }
           );
@@ -48,8 +48,8 @@ export default function AddExpenses({ _id, onExpenseAdded }) {
       const response = await axios.post(
         `http://localhost:8080/api/dashboard/expenses/${_id}/create`,
         {
-          name,
-          amount,
+          ExpenseName:name,
+          ExpenseAmount:amount,
           createdBy: userEmail,
         },
         {
@@ -74,12 +74,12 @@ export default function AddExpenses({ _id, onExpenseAdded }) {
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="flex flex-col">
-        <label htmlFor="name" className="text-sm font-medium text-gray-700">
+        <label htmlFor="ExpenseName" className="text-sm font-medium text-gray-700">
           Expense Name
         </label>
         <input
-          id="name"
-          name="name"
+          id="ExpenseName"
+          name="ExpenseName"
           type="text"
           required
           value={name}
@@ -88,12 +88,12 @@ export default function AddExpenses({ _id, onExpenseAdded }) {
         />
       </div>
       <div className="flex flex-col">
-        <label htmlFor="amount" className="text-sm font-medium text-gray-700">
+        <label htmlFor="ExpenseAmount" className="text-sm font-medium text-gray-700">
         Expense Amount
         </label>
         <input
-          id="amount"
-          name="amount"
+          id="ExpenseAmount"
+          name="ExpenseAmount"
           type="number"
           required
           value={amount}

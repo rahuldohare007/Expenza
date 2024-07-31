@@ -21,12 +21,11 @@ exports.getExpensesById = async (req, res) => {
 
 exports.createExpenses = async (req, res) => {
   try {
-    const { name, amount } = req.body;
-    const { _id } = req.params; // Extract _id from URL parameters
-    const createdBy = req.user; // Assuming user email is added to req.user by authenticateToken middleware
-    const date = new Date(); // Use current date for expense date
+    const { ExpenseName, ExpenseAmount, createdBy } = req.body;
+    const { _id } = req.params; 
+    const date = new Date(); 
 
-    if (!name || !amount || !_id) {
+    if (!ExpenseName || !ExpenseAmount || !_id) {
       return res
         .status(400)
         .json({ message: "Name, amount, and budget ID are required." });
@@ -34,9 +33,9 @@ exports.createExpenses = async (req, res) => {
 
     // Create the new expense
     const expense = new Expense({
-      name,
+      ExpenseName,
       date,
-      amount,
+      ExpenseAmount,
       budgetId: _id, // Use _id as budgetId
       createdBy,
     });
