@@ -69,7 +69,7 @@ const Dashboard = () => {
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="inline w-8 h-8 text-gray-200 animate-spin fill-purple-700"
+                className="inline w-8 h-8 text-gray-200 animate-spin fill-indigo-700"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

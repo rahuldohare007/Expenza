@@ -15,7 +15,7 @@ export default function BudgetItem({ budget, onClick }) {
             <h2 className="text-sm text-grey-500">{budget.totalItem} Item</h2>
           </div>
         </div>
-        <h2 className="font-bold text-purple-700 text-lg">
+        <h2 className="font-bold text-indigo-700 text-lg">
           ₹{budget.budgetAmount}
         </h2>
       </div>
@@ -29,7 +29,7 @@ export default function BudgetItem({ budget, onClick }) {
           </h2>
         </div>
         <div className="w-full bg-slate-300 h-2 rounded-full">
-          <div className="w-[50%] bg-purple-700 h-2 rounded-full"></div>
+          <div className="w-[50%] bg-indigo-700 h-2 rounded-full"></div>
         </div>
       </div>
     </div>

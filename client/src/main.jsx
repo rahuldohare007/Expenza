@@ -46,6 +46,7 @@
 // );
 
 
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -56,7 +57,7 @@ import SignInPage from "./pages/SignInPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Dashboard from "./routes/Dashboard/Dashboard.jsx";
 import Budgets from "./routes/Budgets/Budgets.jsx";
-import ExpensesScreen from "./routes/Expenses/ExpensesScreen.jsx"; // Updated import path
+import ExpensesScreen from "./routes/Expenses/ExpensesScreen.jsx";
 import Upgrades from "./routes/Upgrades/Upgrades.jsx";
 import ErrorPage from "./pages/Page404.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
