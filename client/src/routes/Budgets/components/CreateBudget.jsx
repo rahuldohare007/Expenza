@@ -207,10 +207,10 @@ export default function CreateBudget({ onBudgetCreated }) {
                 <button
                   type="submit"
                   disabled={!(name && amount)}
-                  className={`px-4 py-2 w-full bg-purple-700 text-white rounded-md ${
+                  className={`px-4 py-2 w-full bg-indigo-700 text-white rounded-md ${
                     !(name && amount)
                       ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-purple-800"
+                      : "hover:bg-indigo-800"
                   }`}
                 >
                   Create Budget
