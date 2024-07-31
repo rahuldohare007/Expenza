@@ -75,7 +75,7 @@ export default function AddExpenses({ _id, onExpenseAdded }) {
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="flex flex-col">
         <label htmlFor="name" className="text-sm font-medium text-gray-700">
-          Name
+          Expense Name
         </label>
         <input
           id="name"
@@ -89,7 +89,7 @@ export default function AddExpenses({ _id, onExpenseAdded }) {
       </div>
       <div className="flex flex-col">
         <label htmlFor="amount" className="text-sm font-medium text-gray-700">
-          Amount
+        Expense Amount
         </label>
         <input
           id="amount"

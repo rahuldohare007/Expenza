@@ -23,7 +23,7 @@ exports.createExpenses = async (req, res) => {
   try {
     const { name, amount } = req.body;
     const { _id } = req.params; // Extract _id from URL parameters
-    const createdBy = req.user.email; // Assuming user email is added to req.user by authenticateToken middleware
+    const createdBy = req.user; // Assuming user email is added to req.user by authenticateToken middleware
     const date = new Date(); // Use current date for expense date
 
     if (!name || !amount || !_id) {
