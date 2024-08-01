@@ -23,7 +23,7 @@ export default function BudgetLists() {
           "http://localhost:8080/api/auth/dashboard",
           {
             headers: {
-              Authorization: accessToken 
+              Authorization: accessToken,
             },
           }
         );
@@ -48,11 +48,13 @@ export default function BudgetLists() {
           {
             params: { email: userEmail },
             headers: {
-              Authorization: localStorage.getItem("accessToken")
+              Authorization: localStorage.getItem("accessToken"),
             },
           }
         );
-        setBudgetList(response.data.sort((a, b) => new Date(b._id) - new Date(a._id)));
+        setBudgetList(
+          response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        );
       } catch (error) {
         console.error("Error fetching budgets:", error);
         setError("Error fetching budgets.");
@@ -64,7 +66,7 @@ export default function BudgetLists() {
 
   const handleBudgetCreated = (newBudget) => {
     setBudgetList((prevList) =>
-      [newBudget, ...prevList].sort((a, b) => new Date(b._id) - new Date(a._id))
+      [newBudget, ...prevList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     );
   };
 
