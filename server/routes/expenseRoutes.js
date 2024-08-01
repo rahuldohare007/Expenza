@@ -10,5 +10,6 @@ router.get(
 );
 
 router.post("/:_id/create",authenticateToken,expenseController.createExpenses)
+router.delete('/:_id/delete', authenticateToken,expenseController.deleteExpense)
 
 module.exports = router;

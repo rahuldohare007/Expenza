@@ -1,10 +1,9 @@
-export default function BudgetItem({ budget, onClick}) {
+export default function BudgetItem({ budget, onClick }) {
   const progressBarWidth = budget.totalSpend
     ? budget.totalSpend < budget.budgetAmount
       ? (budget.totalSpend / budget.budgetAmount) * 100
       : 100
     : 0;
-
 
   return (
     <div

@@ -58,10 +58,12 @@ export default function AddExpenses({
     }
 
     try {
-      // Refresh data before creating the expense
       await refreshData();
 
-      if (parseFloat(amount) > budgetAmount || parseFloat(amount) > remainingAmount ) {
+      if (
+        parseFloat(amount) > budgetAmount ||
+        parseFloat(amount) > remainingAmount
+      ) {
         toast.error("You can't spend more than the budget amount.", {
           position: "bottom-right",
           autoClose: 3000,
@@ -102,8 +104,8 @@ export default function AddExpenses({
           progress: undefined,
           theme: "light",
         });
-        onExpenseAdded(response.data); // Notify parent component
-        await refreshData(); // Refresh data after adding the expense
+        onExpenseAdded(response.data); 
+        await refreshData();
       }
     } catch (error) {
       console.error("Error adding expense:", error);
@@ -159,9 +161,15 @@ export default function AddExpenses({
         </div>
         <button
           type="submit"
-          disabled={!(name && amount) || parseFloat(amount) > budgetAmount || parseFloat(amount) > remainingAmount }
+          disabled={
+            !(name && amount) ||
+            parseFloat(amount) > budgetAmount ||
+            parseFloat(amount) > remainingAmount
+          }
           className={`px-4 py-2 mt-3 w-full bg-indigo-700 text-white rounded-md ${
-            !(name && amount) || parseFloat(amount) > budgetAmount || parseFloat(amount) > remainingAmount
+            !(name && amount) ||
+            parseFloat(amount) > budgetAmount ||
+            parseFloat(amount) > remainingAmount
               ? "opacity-50 cursor-not-allowed"
               : "hover:bg-indigo-800"
           }`}

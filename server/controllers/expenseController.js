@@ -22,8 +22,8 @@ exports.getExpensesById = async (req, res) => {
 exports.createExpenses = async (req, res) => {
   try {
     const { ExpenseName, ExpenseAmount, createdBy } = req.body;
-    const { _id } = req.params; 
-    const date = new Date(); 
+    const { _id } = req.params;
+    const date = new Date();
 
     if (!ExpenseName || !ExpenseAmount || !_id) {
       return res
@@ -45,5 +45,24 @@ exports.createExpenses = async (req, res) => {
   } catch (error) {
     console.error("Error creating expense:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+exports.deleteExpense = async (req, res) => {
+  const { _id } = req.params;
+
+  try {
+    const expense = await Expense.findById(_id);
+
+    if (!expense) {
+      return res.status(404).json({ error: "Expense not found" });
+    }
+
+    await Expense.findByIdAndDelete(_id);
+
+    res.status(200).json({ message: "Expense deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting expense:", error);
+    res.status(500).json({ error: "Server error" });
   }
 };
