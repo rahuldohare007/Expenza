@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ export default function SignUpPage() {
     passwordConfirmation: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -86,7 +87,7 @@ export default function SignUpPage() {
 
       setTimeout(() => {
         navigate("/signin");
-      }, 3000); 
+      }, 3000);
     } catch (err) {
       const errorMessage = err.response?.data?.error || "An error occurred";
       if (errorMessage.includes("username")) {
@@ -313,7 +314,18 @@ export default function SignUpPage() {
           </div>
         </main>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </section>
   );
 }
