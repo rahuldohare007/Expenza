@@ -87,7 +87,7 @@ export default function AddExpenses({
         if (onExpenseAdded) {
           onExpenseAdded(response.data);
         }
-      }, 2000);
+      }, 1000);
     } catch (error) {
       console.error("Error adding expense:", error);
       toast.error("Error adding expense.", {
