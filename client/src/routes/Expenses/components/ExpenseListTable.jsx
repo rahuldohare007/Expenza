@@ -48,7 +48,7 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
         }
       }, 2000);
     } catch (error) {
-      console.error("Error deleting expense:", error);
+      // console.error("Error deleting expense:", error);
       toast.error("Failed to delete expense.", {
         position: "bottom-right",
         autoClose: 3000,

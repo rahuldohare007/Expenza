@@ -25,7 +25,7 @@ export default function ExpensesScreen() {
       );
       setBudget(response.data);
     } catch (error) {
-      console.error("Error fetching budget:", error);
+      // console.error("Error fetching budget:", error);
     }
   };
 
@@ -46,7 +46,7 @@ export default function ExpensesScreen() {
       setExpenses(response.data);
       updateBudgetAndExpenses(response.data);
     } catch (error) {
-      console.error("Error fetching expenses:", error);
+      // console.error("Error fetching expenses:", error);
     }
   };
 

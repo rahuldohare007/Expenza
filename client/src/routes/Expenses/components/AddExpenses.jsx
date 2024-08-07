@@ -28,7 +28,7 @@ export default function AddExpenses({
           );
           setUserEmail(response.data.email);
         } catch (error) {
-          console.error("Error fetching user email:", error);
+          // console.error("Error fetching user email:", error);
         }
       }
     };
@@ -89,7 +89,7 @@ export default function AddExpenses({
         }
       }, 2000);
     } catch (error) {
-      console.error("Error adding expense:", error);
+      // console.error("Error adding expense:", error);
       toast.error("Error adding expense.", {
         position: "bottom-right",
         autoClose: 3000,
