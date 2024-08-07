@@ -2,16 +2,27 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
   const deleteExpense = async (expense) => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!accessToken) {
+      toast.error("Access token not found.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+
     try {
-      const accessToken = localStorage.getItem("accessToken");
-
-      if (!accessToken) {
-        throw new Error("Access token not found");
-      }
-
       await axios.delete(
         `http://localhost:8080/api/dashboard/expenses/${expense._id}/delete`,
         {
@@ -20,9 +31,6 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
           },
         }
       );
-
-      // Update the state to remove the deleted expense
-      onExpenseDeleted(expense);
 
       toast.success("Expense deleted!", {
         position: "bottom-right",
@@ -34,6 +42,11 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
         progress: undefined,
         theme: "light",
       });
+      setTimeout(() => {
+        if (onExpenseDeleted) {
+          onExpenseDeleted(expense);
+        }
+      }, 3000);
     } catch (error) {
       console.error("Error deleting expense:", error);
       toast.error("Failed to delete expense.", {
@@ -71,6 +84,7 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
         </div>
       ))}
       <div>
+        {" "}
         <ToastContainer
           position="bottom-right"
           autoClose={3000}

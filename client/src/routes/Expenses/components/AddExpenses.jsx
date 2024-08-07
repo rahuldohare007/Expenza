@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddExpenses({
@@ -8,7 +8,6 @@ export default function AddExpenses({
   budgetAmount,
   remainingAmount,
   onExpenseAdded,
-  refreshData,
 }) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
@@ -17,7 +16,6 @@ export default function AddExpenses({
   useEffect(() => {
     const fetchUserEmail = async () => {
       const accessToken = localStorage.getItem("accessToken");
-
       if (accessToken) {
         try {
           const response = await axios.get(
@@ -58,25 +56,6 @@ export default function AddExpenses({
     }
 
     try {
-      await refreshData();
-
-      if (
-        parseFloat(amount) > budgetAmount ||
-        parseFloat(amount) > remainingAmount
-      ) {
-        toast.error("You can't spend more than the budget amount.", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        return;
-      }
-      // After refreshing data, create the expense
       const response = await axios.post(
         `http://localhost:8080/api/dashboard/expenses/${_id}/create`,
         {
@@ -91,22 +70,23 @@ export default function AddExpenses({
         }
       );
 
-      if (response.status === 201) {
-        setName("");
-        setAmount("");
-        toast.success("Expense added successfully!", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        onExpenseAdded(response.data); 
-        await refreshData();
-      }
+      setName("");
+      setAmount("");
+      toast.success("Expense added successfully!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        if (onExpenseAdded) {
+          onExpenseAdded(response.data);
+        }
+      }, 3000);
     } catch (error) {
       console.error("Error adding expense:", error);
       toast.error("Error adding expense.", {
@@ -177,18 +157,20 @@ export default function AddExpenses({
           Add New Expense
         </button>
       </form>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      <div>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </div>
     </div>
   );
 }

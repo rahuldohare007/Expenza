@@ -85,7 +85,7 @@ export default function CreateBudget({ onBudgetCreated }) {
           theme: "light",
         });
         handleClose();
-        onBudgetCreated(response.data); // Update parent component with new budget
+        onBudgetCreated(response.data);
       } else {
         toast.error("Failed to create budget.", {
           position: "bottom-right",
