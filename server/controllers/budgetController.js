@@ -3,9 +3,11 @@ const Budget = require("../models/Budget");
 exports.createBudget = async (req, res) => {
   try {
     const { icon, budgetName, budgetAmount, createdBy } = req.body;
-    
+
     if (!budgetName || !budgetAmount) {
-      return res.status(400).json({ error: "Budget Name and Amount are required" });
+      return res
+        .status(400)
+        .json({ error: "Budget Name and Amount are required" });
     }
 
     const newBudget = new Budget({
@@ -13,6 +15,8 @@ exports.createBudget = async (req, res) => {
       budgetName,
       budgetAmount,
       createdBy,
+      totalSpend: 0, 
+      totalItem: 0, 
     });
 
     await newBudget.save();
@@ -33,27 +37,27 @@ exports.getUserBudgets = async (req, res) => {
   try {
     const budgets = await Budget.aggregate([
       {
-        $match: { createdBy: email }
+        $match: { createdBy: email },
       },
       {
         $lookup: {
-          from: 'expenses',        
-          localField: '_id',
-          foreignField: 'budgetId',
-          as: 'expenses'
-        }
+          from: "expenses",
+          localField: "_id",
+          foreignField: "budgetId",
+          as: "expenses",
+        },
       },
       {
         $addFields: {
-          totalSpend: { $sum: "$expenses.amount" },
-          totalItem: { $size: "$expenses" }
-        }
+          totalSpend: { $sum: "$expenses.ExpenseAmount" },
+          totalItem: { $size: "$expenses" },
+        },
       },
       {
         $project: {
-          expenses: 0           
-        }
-      }
+          expenses: 0,
+        },
+      },
     ]);
 
     res.status(200).json(budgets);

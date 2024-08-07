@@ -60,7 +60,7 @@ export default function AddExpenses({
         `http://localhost:8080/api/dashboard/expenses/${_id}/create`,
         {
           ExpenseName: name,
-          ExpenseAmount: amount,
+          ExpenseAmount: parseFloat(amount),
           createdBy: userEmail,
         },
         {

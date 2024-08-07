@@ -31,12 +31,11 @@ exports.createExpenses = async (req, res) => {
         .json({ message: "Name, amount, and budget ID are required." });
     }
 
-    // Create the new expense
     const expense = new Expense({
       ExpenseName,
       date,
       ExpenseAmount,
-      budgetId: _id, // Use _id as budgetId
+      budgetId: _id, 
       createdBy,
     });
 

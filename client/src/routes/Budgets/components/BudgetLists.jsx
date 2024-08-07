@@ -52,7 +52,11 @@ export default function BudgetLists() {
             },
           }
         );
-        setBudgetList(response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        setBudgetList(
+          response.data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          )
+        );
       } catch (error) {
         console.error("Error fetching budgets:", error);
         setError("Error fetching budgets.");
@@ -64,7 +68,9 @@ export default function BudgetLists() {
 
   const handleBudgetCreated = (newBudget) => {
     setBudgetList((prevList) =>
-      [newBudget, ...prevList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      [newBudget, ...prevList].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      )
     );
   };
 
@@ -79,7 +85,11 @@ export default function BudgetLists() {
         <CreateBudget onBudgetCreated={handleBudgetCreated} />
         {budgetList.length > 0
           ? budgetList.map((budget) => (
-              <BudgetItem key={budget._id} budget={budget} onClick={() => handleBudgetClick(budget)} />
+              <BudgetItem
+                key={budget._id}
+                budget={budget}
+                onClick={() => handleBudgetClick(budget)}
+              />
             ))
           : [1, 2, 3, 4, 5, 6].map((item) => (
               <div

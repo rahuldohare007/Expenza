@@ -1,9 +1,12 @@
-export default function BudgetItem({ budget, onClick}) {
-  const progressBarWidth = budget.totalSpend
-    ? budget.totalSpend < budget.budgetAmount
-      ? (budget.totalSpend / budget.budgetAmount) * 100
-      : 100
+export default function BudgetItem({ budget, onClick }) {
+  const totalSpend = budget.totalSpend || 0;
+  const budgetAmount = budget.budgetAmount || 0;
+
+  const progressBarWidth = budgetAmount
+    ? (totalSpend / budgetAmount) * 100
     : 0;
+
+  const remainingAmount = budgetAmount - totalSpend;
 
   return (
     <div
@@ -35,7 +38,7 @@ export default function BudgetItem({ budget, onClick}) {
           <h2 className="text-xs text-slate-400">
             ₹
             {budget.totalSpend
-              ? budget.budgetAmount - budget.totalSpend
+              ? remainingAmount
               : budget.budgetAmount}{" "}
             Remaining
           </h2>
