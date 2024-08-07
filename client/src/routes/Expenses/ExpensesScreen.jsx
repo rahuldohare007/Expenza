@@ -4,6 +4,9 @@ import axios from "axios";
 import BudgetItem from "../Budgets/components/BudgetItem";
 import AddExpenses from "./components/AddExpenses";
 import ExpenseListTable from "./components/ExpenseListTable";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export default function ExpensesScreen() {
   const { _id } = useParams();
@@ -105,6 +108,20 @@ export default function ExpensesScreen() {
             <p className="text-red-500">No expenses found for this budget.</p>
           )}
         </div>
+      </div>
+      <div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       </div>
     </div>
   );
