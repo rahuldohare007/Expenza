@@ -4,8 +4,6 @@ import axios from "axios";
 import BudgetItem from "../Budgets/components/BudgetItem";
 import AddExpenses from "./components/AddExpenses";
 import ExpenseListTable from "./components/ExpenseListTable";
-// import { toast, ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 
 export default function ExpensesScreen() {
   const { _id } = useParams();
@@ -37,7 +35,7 @@ export default function ExpensesScreen() {
         `http://localhost:8080/api/dashboard/expenses/${_id}`,
         {
           headers: {
-            Authorization: accessToken,
+            Authorization: `${accessToken}`,
           },
         }
       );
@@ -93,7 +91,6 @@ export default function ExpensesScreen() {
           budgetAmount={budget?.budgetAmount}
           remainingAmount={budget ? budget.budgetAmount - budget.totalSpend : 0}
           onExpenseAdded={handleAddExpense}
-          // expenses={expenses}
         />
       </div>
       <div className="mt-5">
@@ -109,18 +106,6 @@ export default function ExpensesScreen() {
           )}
         </div>
       </div>
-      {/* <ToastContainer
-        position="bottom-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      /> */}
     </div>
   );
 }

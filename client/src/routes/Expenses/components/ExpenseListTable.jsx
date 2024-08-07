@@ -1,7 +1,7 @@
 import { FaRegTrashAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
@@ -46,7 +46,7 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
         if (onExpenseDeleted) {
           onExpenseDeleted(expense);
         }
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.error("Error deleting expense:", error);
       toast.error("Failed to delete expense.", {
@@ -83,21 +83,6 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
           </h2>
         </div>
       ))}
-      <div>
-        {" "}
-        <ToastContainer
-          position="bottom-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      </div>
     </div>
   );
 }

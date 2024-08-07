@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddExpenses({
@@ -65,7 +65,7 @@ export default function AddExpenses({
         },
         {
           headers: {
-            Authorization: accessToken,
+            Authorization: `${accessToken}`,
           },
         }
       );
@@ -82,11 +82,12 @@ export default function AddExpenses({
         progress: undefined,
         theme: "light",
       });
+      
       setTimeout(() => {
         if (onExpenseAdded) {
           onExpenseAdded(response.data);
         }
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.error("Error adding expense:", error);
       toast.error("Error adding expense.", {
@@ -157,20 +158,6 @@ export default function AddExpenses({
           Add New Expense
         </button>
       </form>
-      <div>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      </div>
     </div>
   );
 }
