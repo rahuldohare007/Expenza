@@ -66,3 +66,20 @@ exports.getUserBudgets = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.deleteBudget = async (req, res) => {
+  const { _id  } = req.params;
+
+  try {
+    const deletedBudget = await Budget.findByIdAndDelete(_id );
+
+    if (!deletedBudget) {
+      return res.status(404).json({ error: "Budget not found" });
+    }
+
+    res.status(200).json({ message: "Budget deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting budget:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

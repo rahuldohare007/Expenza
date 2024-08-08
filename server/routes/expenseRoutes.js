@@ -8,7 +8,6 @@ router.get(
   authenticateToken,
   expenseController.getExpensesById
 );
-
 router.post("/:_id/create",authenticateToken,expenseController.createExpenses)
 router.delete('/:_id/delete', authenticateToken,expenseController.deleteExpense)
 
