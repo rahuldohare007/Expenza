@@ -203,7 +203,7 @@ export default function CreateBudget({ onBudgetCreated }) {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-purple-700 focus:shadow-outline"
                 />
               </div>
-              <div className="mt-5">
+              <div className="mt-5 text-md">
                 <button
                   type="submit"
                   disabled={!(name && amount)}

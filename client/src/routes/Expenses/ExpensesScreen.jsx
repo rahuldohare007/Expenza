@@ -15,7 +15,7 @@ export default function ExpensesScreen() {
   const location = useLocation();
   const navigate = useNavigate();
   const [expenses, setExpenses] = useState([]);
-  const [budget, setBudget] = useState(location.state?.budget);
+  const [budget, setBudget] = useState(location.state?.budget || {});
   const updateBudgetItem = location.state?.updateBudget || (() => {});
 
   const fetchBudget = async () => {
@@ -61,7 +61,7 @@ export default function ExpensesScreen() {
     const totalItem = expenses.length;
     const updatedBudget = { ...budget, totalSpend, totalItem };
     setBudget(updatedBudget);
-    updateBudgetItem(updatedBudget);
+    updateBudgetItem(updatedBudget); // Ensure this triggers a state update
   };
 
   useEffect(() => {
@@ -85,21 +85,29 @@ export default function ExpensesScreen() {
 
   return (
     <div className="p-10">
-      <h2 className="font-bold text-3xl flex justify-between items-center">
-        <span className="flex gap-2 items-center">
-          <IoArrowBackOutline
-            className="cursor-pointer"
-            onClick={() => {
-              navigate("/dashboard/budgets");
+      <div className=" flex justify-between items-center">
+        <h2 className="font-bold text-3xl">
+          <span className="flex gap-2 items-center">
+            <IoArrowBackOutline
+              className="cursor-pointer"
+              onClick={() => {
+                navigate("/dashboard/budgets");
+              }}
+            />
+            My Expenses
+          </span>
+        </h2>
+        <div className="flex items-center">
+          <EditBudget
+            _id={_id}
+            budget={budget}
+            updateBudgetItem={(updatedBudget) => {
+              setBudget(updatedBudget);
             }}
           />
-          My Expenses
-        </span>
-        <div className="flex items-center">
-          <EditBudget />
           <DeleteBudget />
         </div>
-      </h2>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-5">
         {budget ? (
           <BudgetItem budget={budget} />

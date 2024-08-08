@@ -83,3 +83,25 @@ exports.deleteBudget = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.updateBudget = async (req, res) => {
+  const { _id } = req.params;
+  const { icon, budgetName, budgetAmount, createdBy } = req.body;
+
+  try {
+    const updatedBudget = await Budget.findByIdAndUpdate(
+      _id,
+      { icon, budgetName, budgetAmount, createdBy },
+      { new: true }
+    );
+
+    if (!updatedBudget) {
+      return res.status(404).json({ error: "Budget not found" });
+    }
+
+    res.status(200).json(updatedBudget);
+  } catch (error) {
+    console.error("Error updating budget:", error);
+    res.status(500).json({ error: "Error updating budget" });
+  }
+};
