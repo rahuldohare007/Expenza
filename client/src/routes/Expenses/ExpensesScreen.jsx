@@ -5,6 +5,8 @@ import BudgetItem from "../Budgets/components/BudgetItem";
 import AddExpenses from "./components/AddExpenses";
 import ExpenseListTable from "./components/ExpenseListTable";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
+import { IoArrowBackOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -128,15 +130,33 @@ export default function ExpensesScreen() {
   return (
     <div className="p-10">
       <h2 className="font-bold text-3xl flex justify-between items-center">
-        My Expenses
-        <button
-          type="button"
-          className="flex gap-2 text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
-          onClick={handleDeleteClick}
-        >
-          <FaRegTrashAlt className="text-lg" />
-          Delete Budget
-        </button>
+        <span className="flex gap-2 items-center">
+          <IoArrowBackOutline
+            className="cursor-pointer"
+            onClick={() => {
+              navigate("/dashboard/budgets");
+            }}
+          />
+          My Expenses
+        </span>
+        <div className="flex gap-2 items-center">
+          <button
+            type="button"
+            className="flex gap-2 text-white bg-indigo-700 hover:bg-indigo-800 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
+            // onClick={handleEditClick}
+          >
+            <FaRegEdit className="text-lg" />
+            Edit
+          </button>
+          <button
+            type="button"
+            className="flex gap-2 text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
+            onClick={handleDeleteClick}
+          >
+            <FaRegTrashAlt className="text-lg" />
+            Delete
+          </button>
+        </div>
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-5">
         {budget ? (
