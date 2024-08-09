@@ -141,7 +141,7 @@ export default function ExpensesScreen() {
               onExpenseDeleted={handleDeleteExpense}
             />
           ) : (
-            <p className="text-red-600">No expenses found for this budget.</p>
+            <p className="text-red-600">No expenses found</p>
           )}
         </div>
       </div>

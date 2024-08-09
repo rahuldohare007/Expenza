@@ -13,6 +13,7 @@ import Upgrades from "./routes/Upgrades/Upgrades.jsx";
 import ErrorPage from "./pages/Page404.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import DashboardOverview from "./routes/Dashboard/components/DashboardOverview.jsx";
+import ExpensesPage from "./routes/Expenses/ExpensesPage.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const routes = createBrowserRouter([
         children: [
           { index: true, element: <DashboardOverview /> },
           { path: "budgets", element: <Budgets /> },
+          { path: "expenses", element: <ExpensesPage /> }, 
           { path: "expenses/:_id", element: <ExpensesScreen /> }, 
           { path: "upgrades", element: <Upgrades /> },
         ],

@@ -154,7 +154,7 @@ const DashboardOverview = () => {
               onExpenseDeleted={handleExpenseDeleted}
             />
           ) : (
-            <p className="text-red-600">No expenses found for this budget.</p>
+            <p className="text-red-600">No expenses found</p>
           )}
         </div>
         <div className="grid gap-4 lg:gap-6">

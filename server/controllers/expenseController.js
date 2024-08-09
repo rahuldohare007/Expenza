@@ -9,7 +9,7 @@ exports.getExpensesById = async (req, res) => {
     if (!expenses.length) {
       return res
         .status(404)
-        .json({ message: "No expenses found for this budget" });
+        .json({ message: "No expenses found" });
     }
 
     res.status(200).json(expenses);
