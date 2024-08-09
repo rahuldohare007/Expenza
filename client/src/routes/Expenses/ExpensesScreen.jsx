@@ -99,7 +99,7 @@ const updateBudgetAndExpenses = (expenses) => {
   return (
     <div className="p-10">
       <div className=" flex justify-between items-center">
-        <h2 className="font-bold text-3xl">
+        <h2 className="font-bold text-2xl">
           <span className="flex gap-2 items-center">
             <IoArrowBackOutline
               className="cursor-pointer"

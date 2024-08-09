@@ -12,6 +12,7 @@ import ExpensesScreen from "./routes/Expenses/ExpensesScreen.jsx";
 import Upgrades from "./routes/Upgrades/Upgrades.jsx";
 import ErrorPage from "./pages/Page404.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import DashboardOverview from "./routes/Dashboard/components/DashboardOverview.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const routes = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
+          { index: true, element: <DashboardOverview /> },
           { path: "budgets", element: <Budgets /> },
           { path: "expenses/:_id", element: <ExpensesScreen /> }, 
           { path: "upgrades", element: <Upgrades /> },

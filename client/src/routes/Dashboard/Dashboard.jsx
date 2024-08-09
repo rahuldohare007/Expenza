@@ -68,7 +68,7 @@ const Dashboard = () => {
       <div>
         {userData ? (
           <div>
-            <Outlet />
+            <Outlet context={{ userData }}/>
           </div>
         ) : (
           <div className="flex justify-center items-center min-h-screen">

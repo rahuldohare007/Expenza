@@ -210,7 +210,7 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
                 <input
                   id="budgetAmount"
                   type="number"
-                  value={amount}
+                  value={parseInt(amount)}
                   onChange={(e) => setAmount(e.target.value)}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-purple-700 focus:shadow-outline"
                 />
