@@ -15,7 +15,6 @@ const generateRefreshToken = (user) => {
   });
 };
 
-// Register User
 const register = async (req, res) => {
   try {
     const {
@@ -72,7 +71,6 @@ const register = async (req, res) => {
   }
 };
 
-// Sign In User
 const signIn = async (req, res) => {
   try {
     const { credential, password } = req.body;
@@ -105,7 +103,6 @@ const signIn = async (req, res) => {
   }
 };
 
-// Refresh Token
 const refreshToken = (req, res) => {
   const { refreshToken } = req.body;
 
@@ -123,7 +120,6 @@ const refreshToken = (req, res) => {
   });
 };
 
-// Dashboard Route
 const dashboard = async (req, res) => {
   const authHeader = req.headers.authorization;
   const token = authHeader;

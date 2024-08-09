@@ -52,6 +52,10 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
       return;
     }
 
+    const totalSpend = budget.totalSpend || 0; 
+    const totalItem = budget.totalItem || 0; 
+    const remainingAmount = budget.budgetAmount - totalSpend;
+
     try {
       const response = await axios.put(
         `http://localhost:8080/api/dashboard/budgets/${_id}/update`,
@@ -59,6 +63,9 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
           icon: emojiIcon,
           budgetName: name,
           budgetAmount: amount,
+          totalSpend,
+          totalItem,
+          remainingAmount, 
           createdBy: userEmail,
         },
         {
@@ -69,6 +76,13 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
       );
 
       if (response.status === 200) {
+        const updatedBudget = {
+            ...response.data,
+            totalSpend,
+            totalItem,
+            remainingAmount,
+        };
+
         toast.success("Budget updated successfully!", {
           position: "bottom-right",
           autoClose: 3000,
@@ -79,9 +93,11 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
           progress: undefined,
           theme: "light",
         });
+
         if (updateBudgetItem) {
-          updateBudgetItem(response.data);
+            updateBudgetItem(updatedBudget);
         }
+
         handleClose();
       } else {
         toast.error("Failed to update budget.", {
@@ -96,7 +112,6 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
         });
       }
     } catch (error) {
-    //   console.error("Error updating budget:", error);
       toast.error("Failed to update budget.", {
         position: "bottom-right",
         autoClose: 3000,
@@ -203,9 +218,9 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
               <div className="mt-5">
                 <button
                   type="submit"
-                  disabled={!(name && amount)}
+                  disabled={!(name && amount) || budget?.totalSpend > amount}
                   className={`px-4 py-2 w-full bg-indigo-700 text-white rounded-md ${
-                    !(name && amount)
+                    !(name && amount) || budget?.totalSpend > amount
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-indigo-800"
                   }`}

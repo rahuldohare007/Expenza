@@ -1,12 +1,11 @@
 export default function BudgetItem({ budget, onClick }) {
-
   const totalSpend = budget.totalSpend || 0;
   const totalItem = budget.totalItem || 0;
   const budgetAmount = budget.budgetAmount || 0;
 
   const progressBarWidth = budgetAmount ? (totalSpend / budgetAmount) * 100 : 0;
   const remainingAmount = budgetAmount - totalSpend;
-
+  
   return (
     <div
       className="p-5 border rounded-lg hover:shadow-md cursor-pointer h-[170px]"

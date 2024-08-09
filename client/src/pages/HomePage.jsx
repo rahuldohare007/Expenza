@@ -1,5 +1,3 @@
-// HomePage.jsx
-
 import Logo from "../resources/ExpenzaLogo2.png";
 import LandingPage from "../resources/LandingPage.png";
 import GitHubLogo from "../resources/github_logo.png";

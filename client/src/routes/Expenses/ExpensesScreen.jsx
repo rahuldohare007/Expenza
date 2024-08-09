@@ -34,35 +34,48 @@ export default function ExpensesScreen() {
 
   const fetchExpenses = async () => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) throw new Error("Access token not found");
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) throw new Error("Access token not found");
 
-      const response = await axios.get(
-        `http://localhost:8080/api/dashboard/expenses/${_id}`,
-        {
-          headers: {
-            Authorization: `${accessToken}`,
-          },
-        }
-      );
+        const response = await axios.get(
+            `http://localhost:8080/api/dashboard/expenses/${_id}`,
+            {
+                headers: {
+                    Authorization: `${accessToken}`,
+                },
+            }
+        );
 
-      setExpenses(response.data);
-      updateBudgetAndExpenses(response.data);
+        const fetchedExpenses = response.data;
+        setExpenses(fetchedExpenses);
+        updateBudgetAndExpenses(fetchedExpenses);
     } catch (error) {
-      // toast.error("Error fetching expenses");
+        // console.error("Error fetching expenses:", error);
     }
+};
+
+const updateBudgetAndExpenses = (expenses) => {
+  const totalSpend = expenses.reduce(
+      (sum, expense) => sum + (expense.ExpenseAmount || 0),
+      0
+  );
+  const totalItem = expenses.length || 0;
+
+  const remainingAmount = budget?.budgetAmount !== undefined 
+      ? budget.budgetAmount - totalSpend 
+      : 0; 
+
+  const updatedBudget = { 
+      ...budget, 
+      totalSpend, 
+      totalItem, 
+      remainingAmount
   };
 
-  const updateBudgetAndExpenses = (expenses) => {
-    const totalSpend = expenses.reduce(
-      (sum, expense) => sum + expense.ExpenseAmount,
-      0
-    );
-    const totalItem = expenses.length;
-    const updatedBudget = { ...budget, totalSpend, totalItem };
-    setBudget(updatedBudget);
-    updateBudgetItem(updatedBudget); // Ensure this triggers a state update
-  };
+  setBudget(updatedBudget);
+  updateBudgetItem(updatedBudget);
+};
+
 
   useEffect(() => {
     fetchBudget();
