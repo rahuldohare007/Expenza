@@ -1,8 +1,8 @@
-import { FaRegTrashAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Trash2 } from "lucide-react";
 
 export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
   const deleteExpense = async (expense) => {
@@ -76,7 +76,7 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
           <h2>₹{expense.ExpenseAmount}</h2>
           <h2>{format(new Date(expense.date), "dd/MM/yyyy")}</h2>
           <h2>
-            <FaRegTrashAlt
+            <Trash2
               className="text-red-600 hover:cursor-pointer"
               onClick={() => deleteExpense(expense)}
             />

@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import axios from "axios";
 import CardInfo from "./CardInfo";
+import BarChartDashboard from "./BarChartDashboard";
+import BudgetItem from "../../Budgets/components/BudgetItem";
+import ExpenseListTable from "../../Expenses/components/ExpenseListTable";
 
 const DashboardOverview = () => {
   const { userData } = useOutletContext();
   const [userEmail, setUserEmail] = useState(userData ? userData.email : "");
   const [budgetList, setBudgetList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserEmail = async () => {
@@ -64,6 +68,10 @@ const DashboardOverview = () => {
     fetchBudgets();
   }, [userEmail]);
 
+  const handleBudgetClick = (budget) => {
+    navigate(`/dashboard/expenses/${budget._id}`, { state: { budget } });
+  };
+
   return (
     <div className="p-8">
       {userData && (
@@ -73,6 +81,29 @@ const DashboardOverview = () => {
         {`Here's what's happening with your money, Let's manage your expenses.`}
       </p>
       <CardInfo budgetList={budgetList} />
+      <div className="grid grid-cols-1 md:grid-cols-3 mt-6 gap-5">
+        <div className="md:col-span-2">
+          <BarChartDashboard budgetList={budgetList} />
+          <ExpenseListTable />
+        </div>
+        <div className="grid gap-3">
+          <h2 className="font-bold text-lg">Latest Budgets</h2>
+          {budgetList.map((budget) => (
+            <BudgetItem
+              key={budget._id}
+              budget={budget}
+              onClick={() => handleBudgetClick(budget)}
+            />
+          ))}
+          {/* {budgetList.slice(0, 2).map((budget) => (
+            <BudgetItem
+              key={budget._id}
+              budget={budget}
+              onClick={() => handleBudgetClick(budget)}
+            />
+          ))} */}
+        </div>
+      </div>
     </div>
   );
 };

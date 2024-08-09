@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Trash2 } from "lucide-react";
 
 export default function DeleteBudget() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,7 +59,7 @@ export default function DeleteBudget() {
         className="flex gap-2 text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"
         onClick={handleDeleteClick}
       >
-        <FaRegTrashAlt className="text-lg" />
+        <Trash2 className="text-lg" />
         Delete
       </button>
       {isModalOpen && (

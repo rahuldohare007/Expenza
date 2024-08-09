@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function SignInPage() {
   const navigate = useNavigate();
@@ -113,9 +113,9 @@ export default function SignInPage() {
                       className="absolute inset-y-0 right-3 flex items-center text-gray-500"
                     >
                       {showPassword ? (
-                        <FaEyeSlash className="w-5 h-5" />
+                        <EyeOff className="w-5 h-5" />
                       ) : (
-                        <FaEye className="w-5 h-5" />
+                        <Eye className="w-5 h-5" />
                       )}
                     </button>
                   )}

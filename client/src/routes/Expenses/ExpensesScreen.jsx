@@ -4,11 +4,11 @@ import axios from "axios";
 import BudgetItem from "../Budgets/components/BudgetItem";
 import AddExpenses from "./components/AddExpenses";
 import ExpenseListTable from "./components/ExpenseListTable";
-import { IoArrowBackOutline } from "react-icons/io5";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditBudget from "./components/EditBudget";
 import DeleteBudget from "./components/DeleteBudget";
+import { ArrowLeft } from "lucide-react";
 
 export default function ExpensesScreen() {
   const { _id } = useParams();
@@ -34,48 +34,46 @@ export default function ExpensesScreen() {
 
   const fetchExpenses = async () => {
     try {
-        const accessToken = localStorage.getItem("accessToken");
-        if (!accessToken) throw new Error("Access token not found");
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) throw new Error("Access token not found");
 
-        const response = await axios.get(
-            `http://localhost:8080/api/dashboard/expenses/${_id}`,
-            {
-                headers: {
-                    Authorization: `${accessToken}`,
-                },
-            }
-        );
+      const response = await axios.get(
+        `http://localhost:8080/api/dashboard/expenses/${_id}`,
+        {
+          headers: {
+            Authorization: `${accessToken}`,
+          },
+        }
+      );
 
-        const fetchedExpenses = response.data;
-        setExpenses(fetchedExpenses);
-        updateBudgetAndExpenses(fetchedExpenses);
+      const fetchedExpenses = response.data;
+      setExpenses(fetchedExpenses);
+      updateBudgetAndExpenses(fetchedExpenses);
     } catch (error) {
-        // console.error("Error fetching expenses:", error);
+      // console.error("Error fetching expenses:", error);
     }
-};
-
-const updateBudgetAndExpenses = (expenses) => {
-  const totalSpend = expenses.reduce(
-      (sum, expense) => sum + (expense.ExpenseAmount || 0),
-      0
-  );
-  const totalItem = expenses.length || 0;
-
-  const remainingAmount = budget?.budgetAmount !== undefined 
-      ? budget.budgetAmount - totalSpend 
-      : 0; 
-
-  const updatedBudget = { 
-      ...budget, 
-      totalSpend, 
-      totalItem, 
-      remainingAmount
   };
 
-  setBudget(updatedBudget);
-  updateBudgetItem(updatedBudget);
-};
+  const updateBudgetAndExpenses = (expenses) => {
+    const totalSpend = expenses.reduce(
+      (sum, expense) => sum + (expense.ExpenseAmount || 0),
+      0
+    );
+    const totalItem = expenses.length || 0;
 
+    const remainingAmount =
+      budget?.budgetAmount !== undefined ? budget.budgetAmount - totalSpend : 0;
+
+    const updatedBudget = {
+      ...budget,
+      totalSpend,
+      totalItem,
+      remainingAmount,
+    };
+
+    setBudget(updatedBudget);
+    updateBudgetItem(updatedBudget);
+  };
 
   useEffect(() => {
     fetchBudget();
@@ -101,10 +99,10 @@ const updateBudgetAndExpenses = (expenses) => {
       <div className=" flex justify-between items-center">
         <h2 className="font-bold text-2xl">
           <span className="flex gap-2 items-center">
-            <IoArrowBackOutline
+            <ArrowLeft
               className="cursor-pointer"
               onClick={() => {
-                navigate("/dashboard/budgets");
+                navigate(-1);
               }}
             />
             My Expenses

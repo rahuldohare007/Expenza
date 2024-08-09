@@ -1,4 +1,4 @@
-import { PiPiggyBankBold, PiReceiptBold, PiWalletBold } from "react-icons/pi";
+import { PiggyBank, ReceiptText, Wallet } from "lucide-react";
 
 export default function CardInfo({ budgetList }) {
   const totalBudget = budgetList.reduce(
@@ -20,21 +20,21 @@ export default function CardInfo({ budgetList }) {
               <h2 className="text-sm">Total Budget</h2>
               <h2 className="font-bold text-2xl">₹ {totalBudget}</h2>
             </div>
-            <PiPiggyBankBold className="p-3 h-12 w-12 bg-indigo-600 rounded-full text-white" />
+            <PiggyBank className="p-3 h-12 w-12 bg-indigo-600 rounded-full text-white" />
           </div>
           <div className="p-7 border rounded-lg flex items-center justify-between">
             <div>
               <h2 className="text-sm">Total Spend</h2>
               <h2 className="font-bold text-2xl">₹ {totalSpend}</h2>
             </div>
-            <PiReceiptBold className="p-3 h-12 w-12 bg-indigo-600 rounded-full text-white" />
+            <ReceiptText className="p-3 h-12 w-12 bg-indigo-600 rounded-full text-white" />
           </div>
           <div className="p-7 border rounded-lg flex items-center justify-between">
             <div>
               <h2 className="text-sm">Number Of Budgets</h2>
               <h2 className="font-bold text-2xl">{numberOfBudgets}</h2>
             </div>
-            <PiWalletBold className="p-3 h-12 w-12 bg-indigo-600 rounded-full text-white" />
+            <Wallet className="p-3 h-12 w-12 bg-indigo-600 rounded-full text-white" />
           </div>
         </div>
       ) : (
