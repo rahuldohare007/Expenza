@@ -86,13 +86,13 @@ export default function ExpensesScreen() {
     updateBudgetAndExpenses(newExpenses);
   };
 
-  const handleDeleteExpense = (deletedExpense) => {
-    const newExpenses = expenses.filter(
-      (expense) => expense._id !== deletedExpense._id
-    );
+  const handleDeleteExpense = (expenseId) => {
+    const newExpenses = expenses.filter(expense => expense._id !== expenseId);
     setExpenses(newExpenses);
     updateBudgetAndExpenses(newExpenses);
   };
+  
+  
 
   return (
     <div className="p-10">
