@@ -19,7 +19,7 @@ export default function CreateBudget({ onBudgetCreated }) {
       if (accessToken) {
         try {
           const response = await axios.get(
-            "https://expenza-api.vercel.app/auth/dashboard",
+            "https://expenza-api.vercel.app/api/auth/dashboard",
             {
               headers: {
                 Authorization: `${accessToken}`,
