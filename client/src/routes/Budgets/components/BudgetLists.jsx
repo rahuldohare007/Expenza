@@ -75,7 +75,7 @@ export default function BudgetLists() {
   };
 
   const handleBudgetClick = (budget) => {
-    navigate(`/dashboard/expenses/${budget._id}`, { state: { budget } });
+    navigate(`https://expenza-api.vercel.app/api/dashboard/expenses/${budget._id}`, { state: { budget } });
   };
 
   return (

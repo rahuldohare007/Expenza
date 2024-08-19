@@ -111,7 +111,7 @@ const DashboardOverview = () => {
   }, [budgetList]);
 
   const handleBudgetClick = (budget) => {
-    navigate(`/dashboard/expenses/${budget._id}`, { state: { budget } });
+    navigate(`https://expenza-api.vercel.app/api/dashboard/expenses/${budget._id}`, { state: { budget } });
   };
 
   const handleExpenseDeleted = (deletedExpenseId, budgetId, expenseAmount) => {

@@ -36,7 +36,7 @@ export default function DeleteBudget() {
       });
 
       setTimeout(() => {
-        navigate("/dashboard/budgets");
+        navigate("https://expenza-api.vercel.app/api/dashboard/budgets");
       }, 3000);
     } catch (error) {
       // toast.error("Error deleting budget");
