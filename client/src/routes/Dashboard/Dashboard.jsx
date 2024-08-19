@@ -20,7 +20,7 @@ const Dashboard = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/auth/dashboard",
+          "https://expenza-api.vercel.app/api/auth/dashboard",
           {
             headers: {
               Authorization: accessToken,
@@ -31,7 +31,7 @@ const Dashboard = () => {
         setUserData(response.data);
 
         const budgetsResponse = await axios.get(
-          "http://localhost:8080/api/dashboard/budgets/user",
+          "https://expenza-api.vercel.app/api/dashboard/budgets/user",
           {
             params: { email: response.data.email },
             headers: {

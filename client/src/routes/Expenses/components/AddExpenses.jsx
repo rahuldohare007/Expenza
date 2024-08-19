@@ -19,7 +19,7 @@ export default function AddExpenses({
       if (accessToken) {
         try {
           const response = await axios.get(
-            "http://localhost:8080/api/auth/dashboard",
+            "https://expenza-api.vercel.app/api/auth/dashboard",
             {
               headers: {
                 Authorization: `${accessToken}`,
@@ -57,7 +57,7 @@ export default function AddExpenses({
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/dashboard/expenses/${_id}/create`,
+        `https://expenza-api.vercel.app/api/dashboard/expenses/${_id}/create`,
         {
           ExpenseName: name,
           ExpenseAmount: parseFloat(amount),

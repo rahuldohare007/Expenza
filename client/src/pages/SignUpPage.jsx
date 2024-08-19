@@ -67,7 +67,7 @@ export default function SignUpPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signup",
+        "https://expenza-api.vercel.app/api/auth/signup",
         formData
       );
 

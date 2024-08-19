@@ -20,7 +20,7 @@ export default function BudgetLists() {
         }
 
         const response = await axios.get(
-          "http://localhost:8080/api/auth/dashboard",
+          "https://expenza-api.vercel.app/api/auth/dashboard",
           {
             headers: {
               Authorization: `${accessToken}`,
@@ -44,7 +44,7 @@ export default function BudgetLists() {
 
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/dashboard/budgets/user",
+          "https://expenza-api.vercel.app/api/dashboard/budgets/user",
           {
             params: { email: userEmail },
             headers: {

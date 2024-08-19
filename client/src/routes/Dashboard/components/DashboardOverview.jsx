@@ -23,7 +23,7 @@ const DashboardOverview = () => {
         if (!accessToken) throw new Error("Access token not found");
 
         const response = await axios.get(
-          "http://localhost:8080/api/auth/dashboard",
+          "https://expenza-api.vercel.app/api/auth/dashboard",
           {
             headers: {
               Authorization: `${accessToken}`,
@@ -46,7 +46,7 @@ const DashboardOverview = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/dashboard/budgets/user",
+          "https://expenza-api.vercel.app/api/dashboard/budgets/user",
           {
             params: { email: userEmail },
             headers: {
@@ -80,7 +80,7 @@ const DashboardOverview = () => {
           budgetList.map(async (budget) => {
             try {
               const response = await axios.get(
-                `http://localhost:8080/api/dashboard/expenses/${budget._id}`,
+                `https://expenza-api.vercel.app/api/dashboard/expenses/${budget._id}`,
                 {
                   headers: {
                     Authorization: `${accessToken}`,

@@ -20,7 +20,7 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
       if (accessToken) {
         try {
           const response = await axios.get(
-            "http://localhost:8080/api/auth/dashboard",
+            "https://expenza-api.vercel.app/api/auth/dashboard",
             {
               headers: {
                 Authorization: `${accessToken}`,
@@ -58,7 +58,7 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/dashboard/budgets/${_id}/update`,
+        `https://expenza-api.vercel.app/api/dashboard/budgets/${_id}/update`,
         {
           icon: emojiIcon,
           budgetName: name,

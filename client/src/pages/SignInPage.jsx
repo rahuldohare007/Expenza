@@ -22,7 +22,7 @@ export default function SignInPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signin",
+        "https://expenza-api.vercel.app/api/auth/signin",
         formData
       );
 
