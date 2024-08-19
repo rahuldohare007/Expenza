@@ -12,7 +12,7 @@ const expenseRoutes = require('./routes/expenseRoutes');
 
 
 app.use(cors({
-  origin: [""],
+  origin: ["https://expenza-client.vercel.app/"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
