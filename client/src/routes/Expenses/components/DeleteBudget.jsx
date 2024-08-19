@@ -16,7 +16,7 @@ export default function DeleteBudget() {
       if (!accessToken) throw new Error("Access token not found");
 
       await axios.delete(
-        `https://expenza-api.vercel.app/api/dashboard/budgets/${_id}/delete`,
+        `https://expenza-api.vercel.app/dashboard/budgets/${_id}/delete`,
         {
           headers: {
             Authorization: `${accessToken}`,

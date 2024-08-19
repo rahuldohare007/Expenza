@@ -44,7 +44,7 @@ export default function BudgetLists() {
 
       try {
         const response = await axios.get(
-          "https://expenza-api.vercel.app/api/dashboard/budgets/user",
+          "https://expenza-api.vercel.app/dashboard/budgets/user",
           {
             params: { email: userEmail },
             headers: {

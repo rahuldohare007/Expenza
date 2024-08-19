@@ -24,7 +24,7 @@ export default function ExpensesScreen() {
       if (!accessToken) throw new Error("Access token not found");
 
       const response = await axios.get(
-        `https://expenza-api.vercel.app/api/dashboard/budgets/${_id}`
+        `https://expenza-api.vercel.app/dashboard/budgets/${_id}`
       );
       setBudget(response.data);
     } catch (error) {
@@ -38,7 +38,7 @@ export default function ExpensesScreen() {
       if (!accessToken) throw new Error("Access token not found");
 
       const response = await axios.get(
-        `https://expenza-api.vercel.app/api/dashboard/expenses/${_id}`,
+        `https://expenza-api.vercel.app/dashboard/expenses/${_id}`,
         {
           headers: {
             Authorization: `${accessToken}`,

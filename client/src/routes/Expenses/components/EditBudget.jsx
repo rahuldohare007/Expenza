@@ -58,7 +58,7 @@ export default function EditBudget({ _id, budget, updateBudgetItem }) {
 
     try {
       const response = await axios.put(
-        `https://expenza-api.vercel.app/api/dashboard/budgets/${_id}/update`,
+        `https://expenza-api.vercel.app/dashboard/budgets/${_id}/update`,
         {
           icon: emojiIcon,
           budgetName: name,

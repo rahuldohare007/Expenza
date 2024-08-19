@@ -31,7 +31,7 @@ const Dashboard = () => {
         setUserData(response.data);
 
         const budgetsResponse = await axios.get(
-          "https://expenza-api.vercel.app/api/dashboard/budgets/user",
+          "https://expenza-api.vercel.app/dashboard/budgets/user",
           {
             params: { email: response.data.email },
             headers: {
