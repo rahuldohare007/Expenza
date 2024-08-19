@@ -44,7 +44,7 @@ const expenseRoutes = require('./routes/expenseRoutes');
 
 // Apply CORS middleware
 app.use(cors({
-  origin: "https://expenza-client.vercel.app",
+  origin: "https://expenza.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
