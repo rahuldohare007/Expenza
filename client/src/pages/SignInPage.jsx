@@ -29,7 +29,7 @@ export default function SignInPage() {
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
-      navigate("https://expenza-api.vercel.app/api/auth/dashboard");
+      navigate("/dashboard");
     } catch (err) {
       toast.error(err.response?.data?.error || "An error occurred", {
         position: "bottom-right",

@@ -86,7 +86,7 @@ export default function SignUpPage() {
       });
 
       setTimeout(() => {
-        navigate("https://expenza-api.vercel.app/api/auth/signin");
+        navigate("/signin");
       }, 3000);
     } catch (err) {
       const errorMessage = err.response?.data?.error || "An error occurred";
