@@ -14,7 +14,7 @@ const Dashboard = () => {
       const accessToken = localStorage.getItem("accessToken");
 
       if (!accessToken) {
-        navigate("https://expenza-api.vercel.app/api/auth/signin");
+        navigate("/signin");
         return;
       }
 
@@ -41,7 +41,7 @@ const Dashboard = () => {
         );
 
         if (budgetsResponse.data.length === 0) {
-          navigate("https://expenza-api.vercel.app/api/dashboard/budgets");
+          navigate("/dashboard/budgets");
         }
       } catch (err) {
         toast.error("Authentication Error: Session expired or other issue. Please sign in again.", {
@@ -56,7 +56,7 @@ const Dashboard = () => {
         });
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        navigate("https://expenza-api.vercel.app/api/auth/signin");
+        navigate("/signin");
       }
     };
 

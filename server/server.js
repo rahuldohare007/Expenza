@@ -47,14 +47,10 @@ app.use(cors({
   origin: "https://expenza-client.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(bodyParser.json());
 app.use(express.json());
-
-// Ensure that CORS is applied before your routes
-app.options('*', cors());
 
 DatabaseConnection();
 
