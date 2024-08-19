@@ -11,7 +11,11 @@ const budgetRoutes = require('./routes/budgetRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
 
 
-app.use(cors());
+app.use(cors({
+  origin: [""],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(bodyParser.json());
 app.use(express.json());
 DatabaseConnection();

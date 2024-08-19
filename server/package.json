@@ -2,10 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Expenza - Effortlessly track and manage expenses on-the-go with categorization and logging",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node server.js",
+    "use": "@vercel/static-build"
   },
   "repository": {
     "type": "git",
@@ -14,7 +15,6 @@
   "author": "Rahul Dohare",
   "license": "MIT",
   "dependencies": {
-    "@vercel/node": "^3.2.8",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
