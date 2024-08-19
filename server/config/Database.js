@@ -15,9 +15,7 @@ async function DatabaseConnection() {
       console.log('Mongoose connection is disconnected');
     });
 
-    await mongoose.connect(process.env.DATABASE_URL, {
-      dbName: process.env.DATABASE_NAME,
-    });
+    await mongoose.connect(process.env.DATABASE_URL);
     console.log('Database connection established successfully');
   } catch (err) {
     console.error('Database connection error: ', err);
