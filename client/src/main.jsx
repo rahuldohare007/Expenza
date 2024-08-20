@@ -37,10 +37,10 @@ const routes = createBrowserRouter([
           { path: "expenses", element: <ExpensesPage /> },
           { path: "expenses/:_id", element: <ExpensesScreen /> },
           { path: "upgrades", element: <Upgrades /> },
-          { path: "*", element: <div>404 Not Found</div> },
+          { path: "*", element: <ErrorPage /> },
         ],
       },
-      { path: "*", element: <div>404 Not Found</div> },
+      { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);
