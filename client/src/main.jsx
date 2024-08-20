@@ -19,7 +19,7 @@ const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <HomePage /> },
       { path: "signup", element: <SignUpPage /> },
@@ -34,9 +34,10 @@ const routes = createBrowserRouter([
         children: [
           { index: true, element: <DashboardOverview /> },
           { path: "budgets", element: <Budgets /> },
-          { path: "expenses", element: <ExpensesPage /> }, 
-          { path: "expenses/:_id", element: <ExpensesScreen /> }, 
+          { path: "expenses", element: <ExpensesPage /> },
+          { path: "expenses/:_id", element: <ExpensesScreen /> },
           { path: "upgrades", element: <Upgrades /> },
+          { path: "*", element: <ErrorPage /> },
         ],
       },
       { path: "*", element: <ErrorPage /> },
@@ -46,6 +47,6 @@ const routes = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <RouterProvider router={routes} />
+    <RouterProvider router={routes} />
   </React.StrictMode>
 );
