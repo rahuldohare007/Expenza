@@ -1,4 +1,6 @@
 import { useRouteError } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 export default function ErrorPage() {
   const error = useRouteError();
   console.error(error);
@@ -30,7 +32,7 @@ export default function ErrorPage() {
           </h1>
 
           <p className="mt-4 text-gray-500">{"We can't find that page."}</p>
-          <a href="/">
+          <Link to="/">
             <button
               type="button"
               className="text-white bg-indigo-800 hover:bg-indigo-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-7 py-3 me-2 mb-2"
@@ -38,7 +40,7 @@ export default function ErrorPage() {
               {" "}
               Go Back Home
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </>
