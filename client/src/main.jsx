@@ -39,6 +39,7 @@ const routes = createBrowserRouter([
           { path: "upgrades", element: <Upgrades /> },
         ],
       },
+      { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);
