@@ -57,7 +57,7 @@ export default function CreateBudget({ onBudgetCreated }) {
 
     try {
       const response = await axios.post(
-        "https://expenza-api.vercel.app/dashboard/budgets/create",
+        "https://expenza-api.vercel.app/api/dashboard/budgets/create",
         {
           icon: emojiIcon,
           budgetName: name,

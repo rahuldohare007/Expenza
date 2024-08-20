@@ -27,7 +27,7 @@ export default function ExpenseListTable({ expenses, onExpenseDeleted }) {
     try {
       setDeleting(expenseId); // Mark the expense as being deleted
       await axios.delete(
-        `https://expenza-api.vercel.app/dashboard/expenses/${expenseId}/delete`,
+        `https://expenza-api.vercel.app/api/dashboard/expenses/${expenseId}/delete`,
         {
           headers: {
             Authorization: `${accessToken}`,
