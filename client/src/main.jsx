@@ -10,7 +10,7 @@ import Dashboard from "./routes/Dashboard/Dashboard.jsx";
 import Budgets from "./routes/Budgets/Budgets.jsx";
 import ExpensesScreen from "./routes/Expenses/ExpensesScreen.jsx";
 import Upgrades from "./routes/Upgrades/Upgrades.jsx";
-import ErrorPage from "./pages/Page404.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import DashboardOverview from "./routes/Dashboard/components/DashboardOverview.jsx";
 import ExpensesPage from "./routes/Expenses/ExpensesPage.jsx";
